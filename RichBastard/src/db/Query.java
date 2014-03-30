@@ -24,8 +24,7 @@ public class Query {
 		}
 	}
 
-	
-	
+		
 	public void addQuestion(Question question){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHelper.COLUMN_TEXT, question.getText());
@@ -33,6 +32,25 @@ public class Query {
 		long id = db.insert(DatabaseHelper.TABLE_QUESTION, null, values);
 		question.setId_qstn(id);
 		
+	}
+	
+	
+	public void addAnswer(Answer answer){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHelper.COLUMN_TEXT_ANSWER, answer.getAnswer_text());
+		values.put(DatabaseHelper.COLUMN_ID_QUESTION_FK, answer.getId_question());
+		values.put(DatabaseHelper.COLUMN_CORRECT, answer.getCorrect());
+		long id = db.insert(DatabaseHelper.TABLE_ANSWER, null, values);
+		answer.setId_answer(id);
+	}
+	
+	
+	public void addBonus(Bonus bonus){
+		ContentValues values = new ContentValues();
+		values.put(DatabaseHelper.COLUMN_DIFFICULTY, bonus.getDifficulty());
+		values.put(DatabaseHelper.COLUMN_SCORE, bonus.getScore());
+		long id = db.insert(DatabaseHelper.TABLE_BONUS, null, values);
+		bonus.setId_bonus(id);
 	}
 	
 	

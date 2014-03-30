@@ -1,18 +1,18 @@
 package db;
 
 public class Bonus {
-	private int id_bonus;
+	private long id_bonus;
 	private int difficulty;
 	private int score;
 	
 	public Bonus(){
 	}
 
-	public int getId_bonus() {
+	public long getId_bonus() {
 		return id_bonus;
 	}
 
-	public void setId_bonus(int id_bonus) {
+	public void setId_bonus(long id_bonus) {
 		this.id_bonus = id_bonus;
 	}
 
