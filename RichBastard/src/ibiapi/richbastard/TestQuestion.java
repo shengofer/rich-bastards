@@ -3,13 +3,13 @@ package ibiapi.richbastard;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Question 
+public class TestQuestion 
 {
 	private String question;
 	private String[] answer_options;
 	private String correct_answer;
 	
-	public Question()
+	public TestQuestion()
 	{
 		question = "Who discovered America?";
 		answer_options = new String[4];

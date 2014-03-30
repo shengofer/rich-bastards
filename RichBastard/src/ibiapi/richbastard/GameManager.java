@@ -17,7 +17,7 @@ public class GameManager
     private GameActivity mActivity;
     
     private TextView mQuestionView;
-    private Question mQuestion;
+    private TestQuestion mQuestion;
     
 	private TextView[] mAnswerViews;
     private String[] mAnswerOptions;
@@ -40,7 +40,7 @@ public class GameManager
 	public void playQuestion(final int questionNumber)
 	{
 		clearQuestion();
-		mQuestion = new Question();
+		mQuestion = new TestQuestion();
 		mAnswerOptions = mQuestion.getAnswerOptions();
 		mQuestionNumber = questionNumber;
         AudioPlayer.playPreQuestion(questionNumber);
