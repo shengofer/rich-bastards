@@ -2,7 +2,7 @@ package db;
 
 public class Answer {
 
-	private int id_answer;
+	private long id_answer;
 	private String answer_text;
 	private int id_question;
 	private int correct;
@@ -10,11 +10,11 @@ public class Answer {
 	public Answer(){
 	}
 
-	public int getId_answer() {
+	public long getId_answer() {
 		return id_answer;
 	}
 
-	public void setId_answer(int id_answer) {
+	public void setId_answer(long id_answer) {
 		this.id_answer = id_answer;
 	}
 

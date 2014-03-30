@@ -26,6 +26,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	public static final String COLUMN_TEXT_ANSWER = "answer_text";
 	public static final String COLUMN_CORRECT = "correct";
 	
+	public boolean _should_fill = false;
+	
+	public boolean shouldFill(){
+		  return _should_fill;
+	  }
+	
 	
 	public DatabaseHelper(Context context){
 		super(context, DB_NAME, null, (DB_VERSION+1));
@@ -53,6 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		sqLiteDatabase.execSQL(CREATE_TABLE_QUESTION);
 		sqLiteDatabase.execSQL(CREATE_TABLE_BONUS);
 		sqLiteDatabase.execSQL(CREATE_TABLE_ANSWER);
+		
+		_should_fill = true;
 	}
 
 	@Override

@@ -2,18 +2,18 @@ package db;
 
 public class Question {
 	
-	private int id_qstn;
+	private long id_qstn;
 	private String text;
 	private int id_bonus;
 	
 	public Question(){
 	}
 
-	public int getId_qstn() {
+	public long getId_qstn() {
 		return id_qstn;
 	}
 
-	public void setId_qstn(int id_qstn) {
+	public void setId_qstn(long id_qstn) {
 		this.id_qstn = id_qstn;
 	}
 
