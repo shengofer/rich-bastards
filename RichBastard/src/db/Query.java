@@ -35,10 +35,10 @@ public class Query {
 	}
 	
 	
-	public void addAnswer(Answer answer){
+	public void addAnswer(Answer answer, Question question){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHelper.COLUMN_TEXT_ANSWER, answer.getAnswer_text());
-		values.put(DatabaseHelper.COLUMN_ID_QUESTION_FK, answer.getId_question());
+		values.put(DatabaseHelper.COLUMN_ID_QUESTION_FK, question.getId_qstn());
 		values.put(DatabaseHelper.COLUMN_CORRECT, answer.getCorrect());
 		long id = db.insert(DatabaseHelper.TABLE_ANSWER, null, values);
 		answer.setId_answer(id);
