@@ -5,7 +5,9 @@ public class Bonus {
 	private int difficulty;
 	private int score;
 	
-	public Bonus(){
+	public Bonus(int difficulty, int score){
+		this.difficulty = difficulty;
+		this.score = score;
 	}
 
 	public long getId_bonus() {

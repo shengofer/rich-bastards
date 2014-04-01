@@ -56,7 +56,12 @@ public class Query {
 	
 	private void PushInformation(){
 		//I will insert all questions that are in our file here
+		int difficulty = 1;
+		int score = 100;
+		Bonus bonus1 = new Bonus(difficulty, score);
+		addBonus(bonus1);
 		
+		Question question1 = new Question();
 	}
 
 	
