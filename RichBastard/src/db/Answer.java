@@ -9,6 +9,12 @@ public class Answer {
 	
 	public Answer(){
 	}
+	
+	public Answer(String answer_text, int id_question, int correct){
+		this.answer_text = answer_text;
+		this.id_question = id_question;
+		this.correct = correct;
+	}
 
 	public long getId_answer() {
 		return id_answer;

@@ -8,6 +8,11 @@ public class Question {
 	
 	public Question(){
 	}
+	
+	public Question(String text, int id_bonus){
+		this.text = text;
+		this.id_bonus = id_bonus;
+	}
 
 	public long getId_qstn() {
 		return id_qstn;
