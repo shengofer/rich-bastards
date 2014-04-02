@@ -84,6 +84,8 @@ public class Query {
 	
 	private void PushInformation(){
 		//I will insert all questions that are in our file here
+		
+		//the first question
 		int difficulty = 1;
 		int score = 100;
 		Bonus bonus1 = new Bonus(difficulty, score);
@@ -107,6 +109,24 @@ public class Query {
 		
 		//A lot of questions and answers will be inserted here.
 		//To study how to do that, view the example above
+		
+		//Second question
+		text_question= "What country gifted the Liberty Statue to the USA?";
+		listAnswer.clear();
+		answer1 = "France";
+		answer2 = "Germany";
+		answer3 = "Russia";
+		answer4 = "Britain";
+		correct = 1;
+		
+		listAnswer.add(answer1);
+		listAnswer.add(answer2);
+		listAnswer.add(answer3);
+		listAnswer.add(answer4);
+		
+		insertionFullData(text_question, listAnswer, correct, bonus1);
+		
+		
 		
 		
 		
