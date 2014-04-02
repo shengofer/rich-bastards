@@ -16,7 +16,7 @@ public class GameActivity extends Activity
         setContentView(R.layout.activity_game);
         AudioPlayer.init(getApplicationContext());
         initGameManager();
-        mGameManager.playQuestion(6);
+        mGameManager.startGame();
         initButtons();
     }
 
@@ -66,17 +66,30 @@ public class GameActivity extends Activity
 	}
 
 
-	private void initButtons() {
-        final Button correctButton = (Button) findViewById(R.id.correctButton);
-        correctButton.setOnClickListener(new View.OnClickListener() 
+	private void initButtons()
+	{
+        final Button fiftyFiftyButton = (Button) findViewById(R.id.fiftyFiftyButton);
+        fiftyFiftyButton.setOnClickListener(new View.OnClickListener() 
         {
             @Override
             public void onClick(View view) 
             {
                 if (mGameManager.useFiftyFifty())
-                	correctButton.setClickable(false);
+                	fiftyFiftyButton.setEnabled(false);//setClickable(false);
             }
         });
+        
+        final Button changeQuestionButton = (Button) findViewById(R.id.changeQuestionButton);
+        changeQuestionButton.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				if (mGameManager.useChangeQuestion())
+					changeQuestionButton.setEnabled(false);//setClickable(false);
+			}
+		});
+        
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
         {

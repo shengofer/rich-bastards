@@ -22,11 +22,14 @@ public class GameManager
 	private TextView[] mAnswerViews;
     private String[] mAnswerOptions;
     
-    private int mQuestionNumber;
+    private int mQuestionNumber = 0;
     private int mCorrectId;
     
     private final Handler h = new Handler();
+    // true, when a question and answers are displayed and a user has not selected any of them
     private boolean canUseLifelines;
+    
+    private static final int numberOfQuestions = 3;
     
     private GameManager() {}
     
@@ -37,18 +40,17 @@ public class GameManager
     	return mGameManager;
     }
 
-	public void playQuestion(final int questionNumber)
+	public void playCurrentQuestion()
 	{
 		clearQuestion();
 		mQuestion = new TestQuestion();
 		mAnswerOptions = mQuestion.getAnswerOptions();
-		mQuestionNumber = questionNumber;
-        AudioPlayer.playPreQuestion(questionNumber);
+        AudioPlayer.playPreQuestion(mQuestionNumber);
         h.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 		        showQuestion();
-		        AudioPlayer.playQuestion(questionNumber);	
+		        AudioPlayer.playQuestion(mQuestionNumber);	
 			}
 		}, PAUSE_AMOUNT);
 	}
@@ -93,15 +95,31 @@ public class GameManager
 		h.postDelayed(new Runnable() 
 		{
 			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				verifyAnswer(answer);
-				h.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						playQuestion(7);						
-					}
-				}, PAUSE_BETWEEN_QUESTIONS);
+			public void run()
+			{
+				if (verifyAnswer(answer))
+				{
+					h.postDelayed(new Runnable()
+					{
+						@Override
+						public void run()
+						{
+							if (mQuestionNumber < numberOfQuestions)
+							{
+								++mQuestionNumber;
+								playCurrentQuestion();
+							}
+							else
+							{
+								// TODO: congratulate the winner
+							}
+						}
+					}, PAUSE_BETWEEN_QUESTIONS);
+				}
+				else
+				{
+					// TODO: present our condolences to the user
+				}
 			}		
 		}, PAUSE_AMOUNT);
 	}
@@ -123,22 +141,35 @@ public class GameManager
 		return false;
 	}
 	
+	public boolean useChangeQuestion()
+	{
+		if (canUseLifelines)
+		{
+			playCurrentQuestion();
+			return true;
+			// TODO: AudioPlayer.playSomething()
+		}
+		return canUseLifelines;
+	}
+	
 	public void stop()
 	{
 		h.removeCallbacksAndMessages(null);
 	}
 	
-	private void verifyAnswer(int answer)
+	private boolean verifyAnswer(int answer)
 	{
 		if (answer == mCorrectId)
 		{
 			stupidAnimationCorrect(mCorrectId);
 			AudioPlayer.playCorrect(mQuestionNumber);
+			return true;
 		}
 		else
 		{
 			stupidAnimationWrong(mCorrectId);
 			AudioPlayer.playWrong(mQuestionNumber);
+			return false;
 		}
 	}
 	
@@ -176,6 +207,15 @@ public class GameManager
 		mAnswerViews[answer].setBackgroundResource(R.drawable.answer_option);
 		mAnswerViews[answer].setText("");
 		mAnswerViews[answer].setClickable(false);
+	}
+	
+	public void startGame()
+	{
+		if (mQuestionNumber == 0)
+		{
+			++mQuestionNumber;
+			playCurrentQuestion();
+		}
 	}
 	
 }
