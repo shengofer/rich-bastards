@@ -30,7 +30,7 @@ public class Query {
 	public void addQuestion(Question question){
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHelper.COLUMN_TEXT, question.getText());
-		values.put(DatabaseHelper.COLUMN_ID_BONUS_FK, question.getId_bonus());
+		values.put(DatabaseHelper.COLUMN_DIFFICULTY, question.get_difficulty());
 		long id = db.insert(DatabaseHelper.TABLE_QUESTION, null, values);
 		question.setId_qstn(id);
 		
@@ -47,25 +47,11 @@ public class Query {
 	}
 	
 	
-	public void addBonus(Bonus bonus){
-		ContentValues values = new ContentValues();
-		values.put(DatabaseHelper.COLUMN_DIFFICULTY, bonus.getDifficulty());
-		values.put(DatabaseHelper.COLUMN_SCORE, bonus.getScore());
-		long id = db.insert(DatabaseHelper.TABLE_BONUS, null, values);
-		bonus.setId_bonus(id);
-	}
-	
-//	public void insertAnswers(ArrayList<Answer> listAnswer, Question question){
-//		for(int i=0; i<listAnswer.size(); i++){
-//			addAnswer(listAnswer.get(i), question);
-//		}		
-//	}
-//	
 	
 	public void insertionFullData(String text_question, ArrayList<String>answers, 
-			int correct, Bonus bonus){
+			int correct, int difficulty){
 		
-		Question question1 = new Question(text_question, (int) bonus.getId_bonus());
+		Question question1 = new Question(text_question, difficulty);
 		addQuestion(question1);		
 
 		for(int i=0; i<answers.size(); i++){
@@ -87,9 +73,6 @@ public class Query {
 		
 		//the first question
 		int difficulty = 1;
-		int score = 100;
-		Bonus bonus1 = new Bonus(difficulty, score);
-		addBonus(bonus1);
 		
 		String text_question = "What is the capital of the UK?";		
 		
@@ -105,7 +88,7 @@ public class Query {
 		listAnswer.add(answer3);
 		listAnswer.add(answer4);
 		
-		insertionFullData(text_question, listAnswer, correct, bonus1);
+		insertionFullData(text_question, listAnswer, correct, difficulty);
 		
 		//A lot of questions and answers will be inserted here.
 		//To study how to do that, view the example above
@@ -124,10 +107,7 @@ public class Query {
 		listAnswer.add(answer3);
 		listAnswer.add(answer4);
 		
-		insertionFullData(text_question, listAnswer, correct, bonus1);
-		
-		
-		
+		insertionFullData(text_question, listAnswer, correct, difficulty);	
 		
 		
 	}

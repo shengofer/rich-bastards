@@ -4,14 +4,14 @@ public class Question {
 	
 	private long id_qstn;
 	private String text;
-	private int id_bonus;
+	private int difficulty; //means the number of the question
 	
 	public Question(){
 	}
 	
-	public Question(String text, int id_bonus){
+	public Question(String text, int difficulty){
 		this.text = text;
-		this.id_bonus = id_bonus;
+		this.difficulty = difficulty;
 	}
 
 	public long getId_qstn() {
@@ -21,6 +21,14 @@ public class Question {
 	public void setId_qstn(long id_qstn) {
 		this.id_qstn = id_qstn;
 	}
+	
+	public int get_difficulty() {
+		return difficulty;
+	}
+
+	public void set_difficulty(int difficulty) {
+		this.difficulty = difficulty;
+	}
 
 	public String getText() {
 		return text;
@@ -28,14 +36,6 @@ public class Question {
 
 	public void setText(String text) {
 		this.text = text;
-	}
-
-	public int getId_bonus() {
-		return id_bonus;
-	}
-
-	public void setId_bonus(int id_bonus) {
-		this.id_bonus = id_bonus;
 	}
 	
 }
