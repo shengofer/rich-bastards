@@ -44,7 +44,7 @@ public class MenuActivity extends Activity implements OnClickListener {
                         //Start game
                         case R.id.menuStartBtn: {
                             Intent intent = new Intent();
-                            intent.setClass(this, GameActivity.class);
+                            intent.setClass(this, ChooseGameModeActivity.class);
                             startActivity(intent);
                         }break;
                         
