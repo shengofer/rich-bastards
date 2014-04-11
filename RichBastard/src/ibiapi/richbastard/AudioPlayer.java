@@ -5,77 +5,108 @@ import android.media.MediaPlayer;
 
 public class AudioPlayer
 {
-    private static MediaPlayer mainMediaPlayer, extraMediaPlayer;
-    private static Context mainContext;
+	private static AudioPlayer mAudioPlayer = null;
+	
+    private MediaPlayer musicMediaPlayer, effectMediaPlayer;
+    private Context mainContext;
+    
+    private boolean musicEnabled, effectsEnabled;
+    
+    public enum Theme
+    {
+    	Classic,
+    	Original
+    }
+    
+    private AudioPlayer() {}
+    
+    public static AudioPlayer getInstance()
+    {
+    	if (mAudioPlayer == null)
+    	{
+    		mAudioPlayer = new AudioPlayer();
+    	}
+    	return mAudioPlayer;
+    }
 
-    public static void init(Context context)
+    public void setContext(Context context)
     {
         mainContext = context;
     }
 
-    public static void playPreQuestion(int question)
+    public void playPreQuestion(int question)
     {
     	stopPlaying();
         int soundID = (question == 6 ? R.raw.pre_question6_11 : R.raw.pre_question7);
-        play(mainMediaPlayer, soundID);
+        play(musicMediaPlayer, soundID);
     }
 
-    public static void playQuestion(int question)
+    public void playQuestion(int question)
     {
     	stopPlaying();
         int soundID = (question == 6 ? R.raw.question6 : R.raw.question7);
-        play(mainMediaPlayer, soundID);
+        play(musicMediaPlayer, soundID);
     }
     
-    public static void playFinalAnswer(int question)
+    public void playFinalAnswer(int question)
     {
     	stopPlaying();
         int soundID = (question == 6 ? R.raw.final_answer6 : R.raw.final_answer7_12);
-        play(mainMediaPlayer, soundID);
+        play(musicMediaPlayer, soundID);
     }
 
-    public static void stopPlaying()
+    public void stopPlaying()
     {
-        releasePlayer(mainMediaPlayer);
-        releasePlayer(extraMediaPlayer);
+        releasePlayer(musicMediaPlayer);
+        releasePlayer(effectMediaPlayer);
     }
 
-    public static void playCorrect(int question)
+    public void playCorrect(int question)
     {
         stopPlaying();
         int soundID = (question == 6 ? R.raw.correct_answer6 : R.raw.correct_answer7);
-        play(mainMediaPlayer, soundID);
+        play(musicMediaPlayer, soundID);
     }
     
-    public static void playWrong(int question)
+    public void playWrong(int question)
     {
         stopPlaying();
         int soundID = (question == 6 ? R.raw.wrong_answer6 : R.raw.wrong_answer7);
-        play(mainMediaPlayer, soundID);
+        play(musicMediaPlayer, soundID);
     }
 
-    public static void playFiftyFifty()
+    public void playFiftyFifty()
     {
-    	extraMediaPlayer = MediaPlayer.create(mainContext, R.raw.fifty_fifty);
-    	extraMediaPlayer.setLooping(false);
-    	extraMediaPlayer.start();
+    	effectMediaPlayer = MediaPlayer.create(mainContext, R.raw.fifty_fifty);
+    	effectMediaPlayer.setLooping(false);
+    	effectMediaPlayer.start();
     }
     
-    private static void play(MediaPlayer player, int soundID)
+    private void play(MediaPlayer player, int soundID)
     {
-    	mainMediaPlayer = MediaPlayer.create(mainContext, soundID);
-    	mainMediaPlayer.setLooping(false);
-    	mainMediaPlayer.start();
+    	musicMediaPlayer = MediaPlayer.create(mainContext, soundID);
+    	musicMediaPlayer.setLooping(false);
+    	musicMediaPlayer.start();
     }
 
-    private static void releasePlayer(MediaPlayer player)
+    private void releasePlayer(MediaPlayer player)
     {
-        if (mainMediaPlayer != null)
+        if (musicMediaPlayer != null)
         {
-        	mainMediaPlayer.stop();
-        	mainMediaPlayer.release();
-        	mainMediaPlayer = null;
+        	musicMediaPlayer.stop();
+        	musicMediaPlayer.release();
+        	musicMediaPlayer = null;
         }
+    }
+    
+    public void setMusicEnabled(boolean enabled)
+    {
+    	musicEnabled = enabled;
+    }
+    
+    public void setEffectsEnabled(boolean enabled)
+    {
+    	effectsEnabled = enabled;
     }
 
 }
