@@ -90,6 +90,19 @@ public class GameActivity extends Activity
 			}
 		});
         
+        final Button askForAudienceButton = (Button) findViewById(R.id.askForAudienceButton);
+        askForAudienceButton.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				if (mGameManager.useAskForAudience())
+				{
+					askForAudienceButton.setEnabled(false);
+				}
+			}
+		});
+        
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
         {
@@ -103,6 +116,11 @@ public class GameActivity extends Activity
 				}
 			});
         }
+        
+        int[] percIds = {R.id.percentageTextViewA, R.id.percentageTextViewB, 
+        		R.id.percentageTextViewC,R.id.percentageTextViewD};
+        for (int i = 0; i < 4; ++i)
+        	findViewById(percIds[i]).setVisibility(View.INVISIBLE);   
     }
 
 }
