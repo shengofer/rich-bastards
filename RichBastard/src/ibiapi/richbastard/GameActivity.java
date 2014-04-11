@@ -2,6 +2,7 @@ package ibiapi.richbastard;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,12 +10,13 @@ import android.widget.TextView;
 public class GameActivity extends Activity 
 {
 	private static GameManager mGameManager;
+	private static AudioPlayer mAudioPlayer;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        AudioPlayer.init(getApplicationContext());
+        initAudioPlayer();
         initGameManager();
         mGameManager.startGame();
         initButtons();
@@ -27,6 +29,14 @@ public class GameActivity extends Activity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.game, menu);
         return true;
+    }
+    
+    private void initAudioPlayer()
+    {
+        mAudioPlayer = AudioPlayer.getInstance();
+        mAudioPlayer.setContext(getApplicationContext());    
+        mAudioPlayer.setMusicEnabled(true);
+        mAudioPlayer.setEffectsEnabled(true);
     }
 
     private void initGameManager()
@@ -54,14 +64,14 @@ public class GameActivity extends Activity
 
 	@Override
     protected void onStop() {
-		AudioPlayer.stopPlaying();
+		mAudioPlayer.stopPlaying();
 		mGameManager.stop();
         super.onStop();
     }
 
     @Override
 	protected void onDestroy() {
-    	AudioPlayer.stopPlaying();
+    	mAudioPlayer.stopPlaying();
 		super.onDestroy();
 	}
 

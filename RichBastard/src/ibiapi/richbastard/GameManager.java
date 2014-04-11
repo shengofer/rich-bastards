@@ -12,6 +12,7 @@ import android.widget.TextView;
 public class GameManager 
 {
 	private static GameManager mGameManager;
+	private static AudioPlayer mAudioPlayer;
 	
     private final long PAUSE_AMOUNT = 5000;
     private final long PAUSE_BETWEEN_QUESTIONS = 7000;
@@ -40,7 +41,10 @@ public class GameManager
     public static GameManager getInstance()
     {
     	if (mGameManager == null)
+    	{
     		mGameManager = new GameManager();
+    		mAudioPlayer = AudioPlayer.getInstance();
+    	}
     	return mGameManager;
     }
 
@@ -49,12 +53,12 @@ public class GameManager
 		clearQuestion();
 		mQuestion = new TestQuestion();
 		mAnswerOptions = mQuestion.getAnswerOptions();
-        AudioPlayer.playPreQuestion(mQuestionNumber);
+        mAudioPlayer.playPreQuestion(mQuestionNumber);
         h.postDelayed(new Runnable() {
 			@Override
 			public void run() {
 		        showQuestion();
-		        AudioPlayer.playQuestion(mQuestionNumber);	
+		        mAudioPlayer.playQuestion(mQuestionNumber);	
 			}
 		}, PAUSE_AMOUNT);
 	}
@@ -96,7 +100,7 @@ public class GameManager
 		canUseLifelines = false;
 		hideVotingResults();
 		mAnswerViews[answer].setBackgroundResource(R.drawable.final_answer);
-		AudioPlayer.playFinalAnswer(mQuestionNumber);
+		mAudioPlayer.playFinalAnswer(mQuestionNumber);
 		h.postDelayed(new Runnable() 
 		{
 			@Override
@@ -234,7 +238,7 @@ public class GameManager
 			Collections.shuffle(a);
 			clearAnswer(a.get(0));
 			clearAnswer(a.get(1));
-			AudioPlayer.playFiftyFifty();
+			mAudioPlayer.playFiftyFifty();
 			return true;
 		}
 		return false;
@@ -273,13 +277,13 @@ public class GameManager
 		if (isAnswerCorrect(answer))
 		{
 			stupidAnimationCorrect(mCorrectId);
-			AudioPlayer.playCorrect(mQuestionNumber);
+			mAudioPlayer.playCorrect(mQuestionNumber);
 			return true;
 		}
 		else
 		{
 			stupidAnimationWrong(mCorrectId);
-			AudioPlayer.playWrong(mQuestionNumber);
+			mAudioPlayer.playWrong(mQuestionNumber);
 			return false;
 		}
 	}
