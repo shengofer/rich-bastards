@@ -13,12 +13,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	public static final String TABLE_QUESTION = "Question";
 	public static final String COLUMN_ID = "id_qstn";
 	public static final String COLUMN_TEXT = "text";
-	public static final String COLUMN_ID_BONUS_FK = "id_bonus";
-	
-	public static final String TABLE_BONUS = "Bonus";
-	public static final String COLUMN_ID_BONUS = "id_bonus";
 	public static final String COLUMN_DIFFICULTY = "difficulty";
-	public static final String COLUMN_SCORE = "score";
+	public static final String COLUMN_TOPIC = "topic";
+	
 	
 	public static final String TABLE_ANSWER = "Answer";
 	public static final String COLUMN_ID_ANSWER = "id_answer";
@@ -43,12 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		String CREATE_TABLE_QUESTION = "CREATE TABLE "+ TABLE_QUESTION +"("+
 				COLUMN_ID + " INTEGER PRIMARY KEY autoincrement," +
 				COLUMN_TEXT + " TEXT," +
-				COLUMN_ID_BONUS_FK + " INTEGER);";
-		
-		String CREATE_TABLE_BONUS = "CREATE TABLE " + TABLE_BONUS +"("+
-				COLUMN_ID_BONUS + " INTEGER PRIMARY KEY autoincrement ,"+
-				COLUMN_DIFFICULTY + " INTEGER," +
-				COLUMN_SCORE + "INTEGER);";
+				COLUMN_DIFFICULTY + " INTEGER, "+
+				COLUMN_TOPIC + " TEXT);";
 		
 		String CREATE_TABLE_ANSWER = "CREATE TABLE "+ TABLE_ANSWER + "("+
 				COLUMN_ID_ANSWER + " INTEGER PRIMARY KEY autoincrement,"+
@@ -57,7 +50,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 				COLUMN_CORRECT + " INTEGER);";
 		
 		sqLiteDatabase.execSQL(CREATE_TABLE_QUESTION);
-		sqLiteDatabase.execSQL(CREATE_TABLE_BONUS);
 		sqLiteDatabase.execSQL(CREATE_TABLE_ANSWER);
 		
 		_should_fill = true;
@@ -66,7 +58,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	@Override
 	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
 		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_QUESTION);
-		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_BONUS);
 		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ANSWER);
 		onCreate(sqLiteDatabase);		
 	}

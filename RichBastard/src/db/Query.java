@@ -31,6 +31,7 @@ public class Query {
 		ContentValues values = new ContentValues();
 		values.put(DatabaseHelper.COLUMN_TEXT, question.getText());
 		values.put(DatabaseHelper.COLUMN_DIFFICULTY, question.get_difficulty());
+		values.put(DatabaseHelper.COLUMN_TOPIC, question.getTopic());
 		long id = db.insert(DatabaseHelper.TABLE_QUESTION, null, values);
 		question.setId_qstn(id);
 		
@@ -49,9 +50,9 @@ public class Query {
 	
 	
 	public void insertionFullData(String text_question, ArrayList<String>answers, 
-			int correct, int difficulty){
+			int correct, int difficulty, String topic){
 		
-		Question question1 = new Question(text_question, difficulty);
+		Question question1 = new Question(text_question, difficulty, topic);
 		addQuestion(question1);		
 
 		for(int i=0; i<answers.size(); i++){
@@ -69,12 +70,19 @@ public class Query {
 	}
 	
 	private void PushInformation(){
+//		Names of the topics
+//		1) geo
+//		2) history
+//		3) tech
+//		4) nature
+//		5) sport
+		
 		//I will insert all questions that are in our file here
 		
 		//the first question
-		int difficulty = 1;
-		
+		int difficulty = 1;	
 		String text_question = "What is the capital of the UK?";		
+		String topic = "geo";
 		
 		String answer1 = "Paris";
 		String answer2 = "London";
@@ -88,7 +96,7 @@ public class Query {
 		listAnswer.add(answer3);
 		listAnswer.add(answer4);
 		
-		insertionFullData(text_question, listAnswer, correct, difficulty);
+		insertionFullData(text_question, listAnswer, correct, difficulty, topic);
 		
 		//A lot of questions and answers will be inserted here.
 		//To study how to do that, view the example above
@@ -101,13 +109,14 @@ public class Query {
 		answer3 = "Russia";
 		answer4 = "Britain";
 		correct = 1;
+		topic = "art";
 		
 		listAnswer.add(answer1);
 		listAnswer.add(answer2);
 		listAnswer.add(answer3);
 		listAnswer.add(answer4);
 		
-		insertionFullData(text_question, listAnswer, correct, difficulty);	
+		insertionFullData(text_question, listAnswer, correct, difficulty, topic);	
 		
 		
 	}
