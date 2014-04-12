@@ -80,6 +80,13 @@ public class MenuActivity extends Activity implements OnClickListener {
                             startActivity(set);
                         }
                         
+                        //Help
+                        case R.id.menuHelpBtn: {
+                            Intent help = new Intent();
+                            help.setClass(MenuActivity.this, HelpActivity.class);
+                            startActivity(help);
+                        }
+                        
                          //exit
                         case R.id.menuExitBtn: {
                              finish();
