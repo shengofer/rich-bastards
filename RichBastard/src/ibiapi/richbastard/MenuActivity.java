@@ -1,11 +1,14 @@
 package ibiapi.richbastard;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -13,11 +16,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
-
-public class MenuActivity extends Activity implements OnClickListener {          
+	
+public class MenuActivity extends Activity implements OnClickListener {   
+	
+	SharedPreferences sharedpreferences;
+	public  boolean ENABLE_MUSIC = true; 
+	public  boolean ENABLE_EFFECT = true;
+ 
+	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);        
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         // fullscreen app
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // without title
@@ -25,11 +33,27 @@ public class MenuActivity extends Activity implements OnClickListener {
         setContentView(R.layout.menu_game);
         //setContentView(new GameView(this,null));
         
+        /*BEGIN Click Button Listener*/
         Button startButton = (Button)findViewById(R.id.menuStartBtn);
         startButton.setOnClickListener(this);
         
+        //settings
+        Button settingsButton = (Button)findViewById(R.id.menuSettingsBtn);
+        settingsButton.setOnClickListener(this);
+        
         Button exitButton = (Button)findViewById(R.id.menuExitBtn);
         exitButton.setOnClickListener(this);
+        
+        /*END Click Button Listener*/
+        
+        //set preferences
+        /*
+         * Get preferences where you want, not exactly here
+         * 
+         * SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); 
+         * 	boolean prefMusic = sharedPrefs.getBoolean("prefEnableEffect", true);
+         */
+        setPreferences();
         
         // splash screen
         splash = (ImageView) findViewById(R.id.splashscreen); 
@@ -47,6 +71,14 @@ public class MenuActivity extends Activity implements OnClickListener {
                             intent.setClass(this, ChooseGameModeActivity.class);
                             startActivity(intent);
                         }break;
+                        
+                        //Settings
+                        case R.id.menuSettingsBtn: {
+                            Intent set = new Intent();
+                            set.setClass(MenuActivity.this, SettingsActivity.class);
+                        	//Intent set = new Intent(MenuActivity.this, SettingsActivity.class);
+                            startActivity(set);
+                        }
                         
                          //exit
                         case R.id.menuExitBtn: {
@@ -73,4 +105,11 @@ public class MenuActivity extends Activity implements OnClickListener {
                  super.handleMessage(msg);
              }
           };
+          
+    private void setPreferences(){
+    	// sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+    	SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); 
+    	this.ENABLE_EFFECT = sharedPrefs.getBoolean("prefEnableEffect", true);
+    	this.ENABLE_MUSIC = sharedPrefs.getBoolean("prefEnableMusic", true);
+    }
 }
