@@ -89,7 +89,7 @@ public class MenuActivity extends Activity implements OnClickListener {
                             Intent help = new Intent();
                             help.setClass(MenuActivity.this, HelpActivity.class);
                             startActivity(help);
-                        } 
+                        } break;
                         
                          //exit
                         case R.id.menuExitBtn: {
