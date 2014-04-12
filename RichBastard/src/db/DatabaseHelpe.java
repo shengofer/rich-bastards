@@ -4,7 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper{
+
+//it is useless now because I want to try to work with sql file
+//but in case everything is bad I will use this, so please, do not delete it
+public class DatabaseHelpe extends SQLiteOpenHelper{
 
 	private static int DB_VERSION = 1;
 	private static String DB_NAME = "RichBastard";
@@ -30,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	  }
 	
 	
-	public DatabaseHelper(Context context){
+	public DatabaseHelpe(Context context){
 		super(context, DB_NAME, null, (DB_VERSION+1));
 	}
 	

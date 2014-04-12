@@ -6,12 +6,22 @@ import android.content.Context;
 public class App extends Application {
 
 private static Context mContext;
+public static DataBaseHelper db;
 
-	@Override
-	public void onCreate() {
-    	super.onCreate();
-    	mContext = getApplicationContext();
-	}
+//	@Override
+//	public void onCreate() {
+//    	super.onCreate();
+//    	mContext = getApplicationContext();
+//	}
+	
+	
+	 @Override
+	  public void onCreate() {
+	    super.onCreate();
+	    db = new DataBaseHelper(getApplicationContext());
+	    db.openDataBase();
+
+	  }
 	
 	
 	public static Context getContext() {

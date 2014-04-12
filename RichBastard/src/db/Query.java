@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 //this class contains all queries used in application
 public class Query {
-	private DatabaseHelper dbOpenHelper;
+	private DatabaseHelpe dbOpenHelper;
 	private SQLiteDatabase db;
 
 	static Query _obj;
@@ -22,7 +22,7 @@ public class Query {
 	}
 	
 	public Query() {
-		dbOpenHelper = new DatabaseHelper(App.getContext());
+		dbOpenHelper = new DatabaseHelpe(App.getContext());
 		db = dbOpenHelper.getWritableDatabase();		
 		if (dbOpenHelper.shouldFill()){
 			PushInformation();
@@ -32,10 +32,10 @@ public class Query {
 		
 	public void addQuestion(Question question){
 		ContentValues values = new ContentValues();
-		values.put(DatabaseHelper.COLUMN_TEXT, question.getText());
-		values.put(DatabaseHelper.COLUMN_DIFFICULTY, question.get_difficulty());
-		values.put(DatabaseHelper.COLUMN_TOPIC, question.getTopic());
-		long id = db.insert(DatabaseHelper.TABLE_QUESTION, null, values);
+		values.put(DatabaseHelpe.COLUMN_TEXT, question.getText());
+		values.put(DatabaseHelpe.COLUMN_DIFFICULTY, question.get_difficulty());
+		values.put(DatabaseHelpe.COLUMN_TOPIC, question.getTopic());
+		long id = db.insert(DatabaseHelpe.TABLE_QUESTION, null, values);
 		question.setId_qstn(id);
 		
 	}
@@ -43,10 +43,10 @@ public class Query {
 	
 	public void addAnswer(Answer answer, Question question){
 		ContentValues values = new ContentValues();
-		values.put(DatabaseHelper.COLUMN_TEXT_ANSWER, answer.getAnswer_text());
-		values.put(DatabaseHelper.COLUMN_ID_QUESTION_FK, question.getId_qstn());
-		values.put(DatabaseHelper.COLUMN_CORRECT, answer.getCorrect());
-		long id = db.insert(DatabaseHelper.TABLE_ANSWER, null, values);
+		values.put(DatabaseHelpe.COLUMN_TEXT_ANSWER, answer.getAnswer_text());
+		values.put(DatabaseHelpe.COLUMN_ID_QUESTION_FK, question.getId_qstn());
+		values.put(DatabaseHelpe.COLUMN_CORRECT, answer.getCorrect());
+		long id = db.insert(DatabaseHelpe.TABLE_ANSWER, null, values);
 		answer.setId_answer(id);
 	}
 	
@@ -57,26 +57,26 @@ public class Query {
 		//first we will select the important question
 		Cursor cursor = db.rawQuery(
 		"SELECT * FROM " +
-				DatabaseHelper.TABLE_QUESTION + " " +
-						"WHERE "+ DatabaseHelper.COLUMN_DIFFICULTY + "=?;",
+				DatabaseHelpe.TABLE_QUESTION + " " +
+						"WHERE "+ DatabaseHelpe.COLUMN_DIFFICULTY + "=?;",
 						new String[] { String.valueOf(quest_number) });
 		
 		//let's get the selected question
 		Question question = new Question(
-				cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID)),
-				cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TEXT)),
+				cursor.getLong(cursor.getColumnIndex(DatabaseHelpe.COLUMN_ID)),
+				cursor.getString(cursor.getColumnIndex(DatabaseHelpe.COLUMN_TEXT)),
 				quest_number,
-				cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TOPIC))				
+				cursor.getString(cursor.getColumnIndex(DatabaseHelpe.COLUMN_TOPIC))				
 				);
 		
 		//this is the id of the question
-		long id = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID));
+		long id = cursor.getLong(cursor.getColumnIndex(DatabaseHelpe.COLUMN_ID));
 		cursor.close();
 		
 		//let's select the answers for this question
 		Cursor curs = db.rawQuery(
-				"SELECT * FROM " + DatabaseHelper.TABLE_ANSWER + " WHERE "+ 
-			     DatabaseHelper.COLUMN_ID_QUESTION_FK + " = ?;",
+				"SELECT * FROM " + DatabaseHelpe.TABLE_ANSWER + " WHERE "+ 
+			     DatabaseHelpe.COLUMN_ID_QUESTION_FK + " = ?;",
 			     new String[] { String.valueOf(id) }
 				);
 		
@@ -85,10 +85,10 @@ public class Query {
 			if (curs.moveToFirst()){
 				do{
 					Answer answer = new Answer(
-							curs.getLong(curs.getColumnIndex(DatabaseHelper.COLUMN_ID_ANSWER)),
-							curs.getString(curs.getColumnIndex(DatabaseHelper.COLUMN_TEXT_ANSWER)),
+							curs.getLong(curs.getColumnIndex(DatabaseHelpe.COLUMN_ID_ANSWER)),
+							curs.getString(curs.getColumnIndex(DatabaseHelpe.COLUMN_TEXT_ANSWER)),
 							id,
-							curs.getLong(curs.getColumnIndex(DatabaseHelper.COLUMN_CORRECT))
+							curs.getLong(curs.getColumnIndex(DatabaseHelpe.COLUMN_CORRECT))
 							);
 					ans.add(answer);
 				} while(curs.moveToNext());
