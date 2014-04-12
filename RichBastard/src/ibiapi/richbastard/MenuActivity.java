@@ -44,6 +44,10 @@ public class MenuActivity extends Activity implements OnClickListener {
         Button exitButton = (Button)findViewById(R.id.menuExitBtn);
         exitButton.setOnClickListener(this);
         
+        //Help
+        Button helpButton = (Button)findViewById(R.id.menuHelpBtn);
+        helpButton.setOnClickListener(this);
+        
         /*END Click Button Listener*/
         
         //set preferences
@@ -78,14 +82,14 @@ public class MenuActivity extends Activity implements OnClickListener {
                             set.setClass(MenuActivity.this, SettingsActivity.class);
                         	//Intent set = new Intent(MenuActivity.this, SettingsActivity.class);
                             startActivity(set);
-                        }
+                        } break;
                         
                         //Help
                         case R.id.menuHelpBtn: {
                             Intent help = new Intent();
                             help.setClass(MenuActivity.this, HelpActivity.class);
                             startActivity(help);
-                        }
+                        } 
                         
                          //exit
                         case R.id.menuExitBtn: {
