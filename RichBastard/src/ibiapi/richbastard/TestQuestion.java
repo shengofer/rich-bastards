@@ -2,9 +2,7 @@ package ibiapi.richbastard;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Map;
 
 import db.Answer;
@@ -14,7 +12,6 @@ import db.Question;
 
 public class TestQuestion 
 {
-	private String question;
 	private Question quest;
 	private String[] answer_options;
 	private String correct_answer;
