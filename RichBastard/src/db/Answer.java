@@ -4,8 +4,8 @@ public class Answer {
 
 	private long id_answer;
 	private String answer_text;
-	private int id_question;
-	private int correct;
+	private long id_question;
+	private long correct;
 	
 	public Answer(){
 	}
@@ -13,6 +13,13 @@ public class Answer {
 	public Answer(String answer_text, int id_question, int correct){
 		this.answer_text = answer_text;
 		this.id_question = id_question;
+		this.correct = correct;
+	}
+	
+	public Answer(long id, String test, long id_q, long correct){
+		this.id_answer = id;
+		this.answer_text = test;
+		this.id_question = id_q;
 		this.correct = correct;
 	}
 
@@ -32,19 +39,19 @@ public class Answer {
 		this.answer_text = answer_text;
 	}
 
-	public int getId_question() {
+	public long getId_question() {
 		return id_question;
 	}
 
-	public void setId_question(int id_question) {
+	public void setId_question(long id_question) {
 		this.id_question = id_question;
 	}
 
-	public int getCorrect() {
+	public long getCorrect() {
 		return correct;
 	}
 
-	public void setCorrect(int correct) {
+	public void setCorrect(long correct) {
 		this.correct = correct;
 	}
 	

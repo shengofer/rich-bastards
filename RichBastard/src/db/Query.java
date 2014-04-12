@@ -1,8 +1,11 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 //this class contains all queries used in application
@@ -47,6 +50,56 @@ public class Query {
 		answer.setId_answer(id);
 	}
 	
+	
+	public Map<Question, ArrayList<Answer>> getQuestionWithAnswers(long quest_number){
+		//quest_number is the number of the question or difficulty(in db)
+		
+		//first we will select the important question
+		Cursor cursor = db.rawQuery(
+		"SELECT * FROM " +
+				DatabaseHelper.TABLE_QUESTION + " " +
+						"WHERE "+ DatabaseHelper.COLUMN_DIFFICULTY + "=?;",
+						new String[] { String.valueOf(quest_number) });
+		
+		//let's get the selected question
+		Question question = new Question(
+				cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID)),
+				cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TEXT)),
+				quest_number,
+				cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_TOPIC))				
+				);
+		
+		//this is the id of the question
+		long id = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID));
+		cursor.close();
+		
+		//let's select the answers for this question
+		Cursor curs = db.rawQuery(
+				"SELECT * FROM " + DatabaseHelper.TABLE_ANSWER + " WHERE "+ 
+			     DatabaseHelper.COLUMN_ID_QUESTION_FK + " = ?;",
+			     new String[] { String.valueOf(id) }
+				);
+		
+		ArrayList<Answer> ans = new ArrayList<Answer>();
+		if(curs != null){
+			if (curs.moveToFirst()){
+				do{
+					Answer answer = new Answer(
+							curs.getLong(curs.getColumnIndex(DatabaseHelper.COLUMN_ID_ANSWER)),
+							curs.getString(curs.getColumnIndex(DatabaseHelper.COLUMN_TEXT_ANSWER)),
+							id,
+							curs.getLong(curs.getColumnIndex(DatabaseHelper.COLUMN_CORRECT))
+							);
+					ans.add(answer);
+				} while(curs.moveToNext());
+			}
+		};
+		
+		Map<Question, ArrayList<Answer>> result = new LinkedHashMap<Question, ArrayList<Answer>>();
+		result.put(question, ans);
+		
+		return result;	
+	}
 	
 	
 	public void insertionFullData(String text_question, ArrayList<String>answers, 

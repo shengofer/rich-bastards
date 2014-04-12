@@ -10,7 +10,14 @@ public class Question {
 	public Question(){
 	}
 	
-	public Question(String text, int difficulty, String topic){
+	public Question(String text, long difficulty, String topic){
+		this.text = text;
+		this.difficulty = difficulty;
+		this.topic = topic;
+	}
+	
+	public Question(long id, String text, long difficulty, String topic){
+		this.id_qstn = id;
 		this.text = text;
 		this.difficulty = difficulty;
 		this.topic = topic;
