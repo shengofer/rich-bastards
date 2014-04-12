@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_help">HelpActivity</string>
+    
+    <string name="test_help">It works!</string>
 
 </resources>
