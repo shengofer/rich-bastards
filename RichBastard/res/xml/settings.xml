@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
+<PreferenceCategory 
+        android:title="Sound settings"
+        android:key="sound_settings">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="prefEnableEffect"
@@ -12,6 +14,15 @@
             android:key="prefEnableMusic"
             android:title="Enable music" >
         </CheckBoxPreference>
-
+        
+        <ListPreference 
+            android:key="pref_music_theme"
+            android:title="Music set"
+            android:summary="Define sound theme"
+            android:defaultValue="1" 
+            android:entries="@array/musicSet"
+            android:entryValues="@array/musicSetValues"
+        />  
+ </PreferenceCategory>
 
 </PreferenceScreen>
