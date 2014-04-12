@@ -1,7 +1,9 @@
 package ibiapi.richbastard;
 
+import ibiapi.richbastard.AudioPlayer.Theme;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,14 +11,15 @@ import android.widget.TextView;
 public class GameActivity extends Activity 
 {
 	private static GameManager mGameManager;
+	private static AudioPlayer mAudioPlayer;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        AudioPlayer.init(getApplicationContext());
+        initAudioPlayer();
         initGameManager();
-        mGameManager.playQuestion(6);
+        mGameManager.startGame();
         initButtons();
     }
 
@@ -27,6 +30,15 @@ public class GameActivity extends Activity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.game, menu);
         return true;
+    }
+    
+    private void initAudioPlayer()
+    {
+        mAudioPlayer = AudioPlayer.getInstance();
+        mAudioPlayer.setContext(getApplicationContext());    
+        mAudioPlayer.setMusicEnabled(true);
+        mAudioPlayer.setEffectsEnabled(true);
+        mAudioPlayer.setTheme(Theme.Classic);
     }
 
     private void initGameManager()
@@ -54,29 +66,55 @@ public class GameActivity extends Activity
 
 	@Override
     protected void onStop() {
-		AudioPlayer.stopPlaying();
+		mAudioPlayer.stopPlaying();
 		mGameManager.stop();
         super.onStop();
     }
 
     @Override
 	protected void onDestroy() {
-    	AudioPlayer.stopPlaying();
+    	mAudioPlayer.stopPlaying();
 		super.onDestroy();
 	}
 
 
-	private void initButtons() {
-        final Button correctButton = (Button) findViewById(R.id.correctButton);
-        correctButton.setOnClickListener(new View.OnClickListener() 
+	private void initButtons()
+	{
+        final Button fiftyFiftyButton = (Button) findViewById(R.id.fiftyFiftyButton);
+        fiftyFiftyButton.setOnClickListener(new View.OnClickListener() 
         {
             @Override
             public void onClick(View view) 
             {
                 if (mGameManager.useFiftyFifty())
-                	correctButton.setClickable(false);
+                	fiftyFiftyButton.setEnabled(false);//setClickable(false);
             }
         });
+        
+        final Button changeQuestionButton = (Button) findViewById(R.id.changeQuestionButton);
+        changeQuestionButton.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				if (mGameManager.useChangeQuestion())
+					changeQuestionButton.setEnabled(false);//setClickable(false);
+			}
+		});
+        
+        final Button askForAudienceButton = (Button) findViewById(R.id.askForAudienceButton);
+        askForAudienceButton.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				if (mGameManager.useAskForAudience())
+				{
+					askForAudienceButton.setEnabled(false);
+				}
+			}
+		});
+        
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
         {
@@ -90,6 +128,11 @@ public class GameActivity extends Activity
 				}
 			});
         }
+        
+        int[] percIds = {R.id.percentageTextViewA, R.id.percentageTextViewB, 
+        		R.id.percentageTextViewC,R.id.percentageTextViewD};
+        for (int i = 0; i < 4; ++i)
+        	findViewById(percIds[i]).setVisibility(View.INVISIBLE);   
     }
 
 }

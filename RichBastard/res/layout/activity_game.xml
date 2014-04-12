@@ -20,7 +20,7 @@
         android:clickable="false" />
 
     <Button
-        android:id="@+id/correctButton"
+        android:id="@+id/fiftyFiftyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -29,6 +29,16 @@
         android:layout_marginLeft="19dp"
         android:layout_marginTop="29dp"
         android:text="50:50" />
+
+    <Button
+        android:id="@+id/changeQuestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="19dp"
+        android:layout_marginTop="29dp"
+        android:text="Change question" />
 
     <RelativeLayout
         android:id="@+id/question_layout"
@@ -114,6 +124,52 @@
             android:background="@drawable/answer_option"
             android:gravity="left|center_vertical"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/percentageTextViewA"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/variant_b"
+            android:layout_alignRight="@+id/variant_a"
+            android:layout_alignTop="@+id/variant_a"
+            android:text="%1"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/percentageTextViewB"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/variant_c"
+            android:layout_alignRight="@+id/variant_b"
+            android:layout_alignTop="@+id/variant_b"
+            android:text="%2"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/percentageTextViewC"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/variant_d"
+            android:layout_alignRight="@+id/variant_c"
+            android:layout_alignTop="@+id/variant_c"
+            android:text="%3"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/percentageTextViewD"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/variant_d"
+            android:layout_alignTop="@+id/variant_d"
+            android:text="%4"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/askForAudienceButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/experimental_rat"
+        android:layout_below="@+id/fiftyFiftyButton"
+        android:layout_marginTop="14dp"
+        android:text="Ask for audience" />
 
 </RelativeLayout>
