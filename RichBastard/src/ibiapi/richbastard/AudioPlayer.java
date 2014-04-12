@@ -18,6 +18,58 @@ public class AudioPlayer
     	Original
     }
     
+    private Theme curTheme;
+    
+    private final int[] classicPreQuestionId = {
+    	0, 0, 0, 0, 0,
+    	R.raw.pre_question6_11, R.raw.pre_question7, 0, 0, 0,
+    	R.raw.pre_question6_11, 0, 0, 0, 0};
+    
+    private final int[] originalPreQuestionId = {
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
+    private final int[] classicQuestionId = {
+    	0, 0, 0, 0, 0,
+    	R.raw.question6, R.raw.question7, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
+    private final int[] originalQuestionId = {
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
+    private final int[] classicFinalAnswerId = {
+    	0, 0, 0, 0, 0,
+    	R.raw.final_answer6, R.raw.final_answer7_12, 0, 0, 0,
+    	0, R.raw.final_answer7_12, 0, 0, 0};
+    
+    private final int[] originalFinalAnswerId = {
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
+    private final int[] classicCorrectAnswerId = {
+    	R.raw.correct1to4, R.raw.correct1to4, R.raw.correct1to4, R.raw.correct1to4, 0,
+    	R.raw.correct_answer6, R.raw.correct_answer7, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
+    private final int[] originalCorrectAnswerId = {
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
+    private final int[] classicWrongAnswerId = {
+    	0, 0, 0, 0, 0,
+    	R.raw.wrong_answer6, R.raw.wrong_answer7, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+        
+    private final int[] originalWrongAnswerId = {
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0,
+    	0, 0, 0, 0, 0};
+    
     private AudioPlayer() {}
     
     public static AudioPlayer getInstance()
@@ -36,23 +88,77 @@ public class AudioPlayer
 
     public void playPreQuestion(int question)
     {
-    	stopPlaying();
-        int soundID = (question == 6 ? R.raw.pre_question6_11 : R.raw.pre_question7);
-        play(musicMediaPlayer, soundID);
+    	--question;
+    	if (musicEnabled)
+    	{
+	    	stopPlaying();
+	        int soundID = (curTheme == Theme.Classic 
+	        		? classicPreQuestionId[question]
+	        		: originalPreQuestionId[question]);
+	        play(musicMediaPlayer, soundID);
+    	}
     }
 
     public void playQuestion(int question)
     {
-    	stopPlaying();
-        int soundID = (question == 6 ? R.raw.question6 : R.raw.question7);
-        play(musicMediaPlayer, soundID);
+    	--question;
+    	if (musicEnabled)
+    	{
+	    	stopPlaying();
+	        int soundID = (curTheme == Theme.Classic 
+	        		? classicQuestionId[question]
+	        		: originalQuestionId[question]);
+	        play(musicMediaPlayer, soundID);
+    	}
     }
     
     public void playFinalAnswer(int question)
     {
-    	stopPlaying();
-        int soundID = (question == 6 ? R.raw.final_answer6 : R.raw.final_answer7_12);
-        play(musicMediaPlayer, soundID);
+    	--question;
+    	if (effectsEnabled)
+    	{
+	    	stopPlaying();
+	        int soundID = (curTheme == Theme.Classic 
+	        		? classicFinalAnswerId[question]
+	        		: originalFinalAnswerId[question]);
+	        play(musicMediaPlayer, soundID);
+    	}
+    }
+    
+    public void playCorrect(int question)
+    {
+    	--question;
+    	if (effectsEnabled)
+    	{
+	    	stopPlaying();
+	        int soundID = (curTheme == Theme.Classic 
+	        		? classicCorrectAnswerId[question]
+	        		: originalCorrectAnswerId[question]);
+	        play(musicMediaPlayer, soundID);
+    	}
+    }
+    
+    public void playWrong(int question)
+    {
+    	--question;
+    	if (effectsEnabled)
+    	{
+	    	stopPlaying();
+	        int soundID = (curTheme == Theme.Classic 
+	        		? classicWrongAnswerId[question]
+	        		: originalWrongAnswerId[question]);
+	        play(effectMediaPlayer, soundID);
+    	}
+    }
+    
+    public void playFiftyFifty()
+    {
+    	if (effectsEnabled)
+    	{
+        	effectMediaPlayer = MediaPlayer.create(mainContext, R.raw.fifty_fifty);
+        	effectMediaPlayer.setLooping(false);
+        	effectMediaPlayer.start();   		
+    	}
     }
 
     public void stopPlaying()
@@ -60,42 +166,21 @@ public class AudioPlayer
         releasePlayer(musicMediaPlayer);
         releasePlayer(effectMediaPlayer);
     }
-
-    public void playCorrect(int question)
-    {
-        stopPlaying();
-        int soundID = (question == 6 ? R.raw.correct_answer6 : R.raw.correct_answer7);
-        play(musicMediaPlayer, soundID);
-    }
-    
-    public void playWrong(int question)
-    {
-        stopPlaying();
-        int soundID = (question == 6 ? R.raw.wrong_answer6 : R.raw.wrong_answer7);
-        play(musicMediaPlayer, soundID);
-    }
-
-    public void playFiftyFifty()
-    {
-    	effectMediaPlayer = MediaPlayer.create(mainContext, R.raw.fifty_fifty);
-    	effectMediaPlayer.setLooping(false);
-    	effectMediaPlayer.start();
-    }
     
     private void play(MediaPlayer player, int soundID)
     {
-    	musicMediaPlayer = MediaPlayer.create(mainContext, soundID);
-    	musicMediaPlayer.setLooping(false);
-    	musicMediaPlayer.start();
+    	player = MediaPlayer.create(mainContext, soundID);
+    	player.setLooping(false);
+    	player.start();
     }
 
     private void releasePlayer(MediaPlayer player)
     {
-        if (musicMediaPlayer != null)
+        if (player != null)
         {
-        	musicMediaPlayer.stop();
-        	musicMediaPlayer.release();
-        	musicMediaPlayer = null;
+        	player.stop();
+        	player.release();
+        	player = null;
         }
     }
     
@@ -109,5 +194,9 @@ public class AudioPlayer
     	effectsEnabled = enabled;
     }
 
+    public void setTheme(Theme theme)
+    {
+    	curTheme = theme;
+    }
 }
 

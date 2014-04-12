@@ -1,5 +1,6 @@
 package ibiapi.richbastard;
 
+import ibiapi.richbastard.AudioPlayer.Theme;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -37,6 +38,7 @@ public class GameActivity extends Activity
         mAudioPlayer.setContext(getApplicationContext());    
         mAudioPlayer.setMusicEnabled(true);
         mAudioPlayer.setEffectsEnabled(true);
+        mAudioPlayer.setTheme(Theme.Classic);
     }
 
     private void initGameManager()

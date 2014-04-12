@@ -326,11 +326,8 @@ public class GameManager
 	
 	public void startGame()
 	{
-		if (mQuestionNumber == 0)
-		{
-			++mQuestionNumber;
-			playCurrentQuestion();
-		}
+		mQuestionNumber = 6;
+		playCurrentQuestion();
 	}
 	
 }
