@@ -1,5 +1,6 @@
 package ibiapi.richbastard;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 	
+@SuppressLint("HandlerLeak")
 public class MenuActivity extends Activity implements OnClickListener {   
 	
 	SharedPreferences sharedpreferences;
