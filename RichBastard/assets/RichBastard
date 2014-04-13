@@ -1,0 +1,23 @@
+BEGIN TRANSACTION;
+CREATE TABLE Answer (id_answer INTEGER PRIMARY KEY, id_question NUMERIC, answer_text TEXT, correct NUMERIC);
+INSERT INTO Answer VALUES(1,1,'Murmillo',0);
+INSERT INTO Answer VALUES(2,1,'Retiarius',0);
+INSERT INTO Answer VALUES(3,1,'Rudiarius',1);
+INSERT INTO Answer VALUES(4,1,'Secutor',0);
+INSERT INTO Answer VALUES(5,2,'Augustus',0);
+INSERT INTO Answer VALUES(6,2,'Caligula',0);
+INSERT INTO Answer VALUES(7,2,'Caracalla',0);
+INSERT INTO Answer VALUES(8,'2','Felix',1);
+CREATE TABLE Question (id_qstn INTEGER PRIMARY KEY, text TEXT, difficulty NUMERIC, topic TEXT);
+INSERT INTO Question VALUES(1,'How were the gladiators in ancient Rome, who earned freedom but decided to remain gladiators, called? ',10,'history');
+INSERT INTO Question VALUES(2,'Which agnomen did Lucius Cornelius Sulla acquire?',7,'history');
+INSERT INTO Question VALUES(3,' In Greek mythology, how was the ferryman of the dead to the realm of Hades called?',8,'myth');
+INSERT INTO Question VALUES(4,'Who is the author of the epic poem "Aeneid"?',4,'art');
+INSERT INTO Question VALUES(5,'The concubine and the wife of which sultan was Roxelana? ',9,'history');
+INSERT INTO Question VALUES(6,'Whom the famous saying "money does not stink" is ascribed to?',7,'history');
+INSERT INTO Question VALUES(7,'Which year was Gaius Octavius honoured with the title "Augustus"?',11,'history');
+INSERT INTO Question VALUES(8,'Which year was Carthage destroyed by the armed forces of Roman Republic?',12,'history');
+INSERT INTO Question VALUES(9,'Which Roman statesman was infamous for creating proscriptions? 
+',10,'history');
+INSERT INTO Question VALUES(10,'Who was the first foreigner among the Roman Emperors?',13,'history');
+COMMIT;

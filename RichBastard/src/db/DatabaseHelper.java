@@ -1,66 +1,157 @@
 package db;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DatabaseHelper extends SQLiteOpenHelper{
+public class DataBaseHelper extends SQLiteOpenHelper{
+    @SuppressLint("SdCardPath")
+	private static String DB_PATH = "/data/data/db/databases/RichBastard"; 
+    private static String DB_NAME = "RichBastard";     
+    private SQLiteDatabase myDataBase;    
+    private final Context myContext;
 
-	private static int DB_VERSION = 1;
-	private static String DB_NAME = "RichBastard";
-	
-	//tables' variables descriptions
-	public static final String TABLE_QUESTION = "Question";
-	public static final String COLUMN_ID = "id_qstn";
-	public static final String COLUMN_TEXT = "text";
-	public static final String COLUMN_DIFFICULTY = "difficulty";
-	public static final String COLUMN_TOPIC = "topic";
-	
-	
-	public static final String TABLE_ANSWER = "Answer";
-	public static final String COLUMN_ID_ANSWER = "id_answer";
-	public static final String COLUMN_ID_QUESTION_FK = "id_qstn";
-	public static final String COLUMN_TEXT_ANSWER = "answer_text";
-	public static final String COLUMN_CORRECT = "correct";
-	
-	public boolean _should_fill = false;
-	
-	public boolean shouldFill(){
-		  return _should_fill;
-	  }
-	
-	
-	public DatabaseHelper(Context context){
-		super(context, DB_NAME, null, (DB_VERSION+1));
-	}
-	
+    public DataBaseHelper(Context context) {
+    	super(context, DB_NAME, null, 1);
+    	this.myContext = context;
+    }	
+
+    
+    public void createDataBase() throws IOException{
+    	boolean dbExist = checkDataBase();
+     
+    	if(dbExist){   		
+    	}else{
+    		this.getReadableDatabase();
+    		try { 
+    			copyDataBase();    
+    		} catch (IOException e) {     
+    			throw new Error("Error copying database");    
+    		}
+    	}     
+    }
+     
+    
+    private boolean checkDataBase(){
+    	SQLiteDatabase checkDB = null;
+     
+    	try{
+    		String myPath = DB_PATH + DB_NAME;
+    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+     
+    		}catch(SQLiteException e){     
+    }
+     
+    	if(checkDB != null){    
+    		checkDB.close();  
+    	}     
+    	return checkDB != null ? true : false;
+    }
+     
+    
+    private void copyDataBase() throws IOException{
+    	InputStream myInput = myContext.getAssets().open(DB_NAME);
+
+    	String outFileName = DB_PATH + DB_NAME;
+    	OutputStream myOutput = new FileOutputStream(outFileName);
+    	byte[] buffer = new byte[1024];
+    	int length;
+    	
+    	while ((length = myInput.read(buffer))>0){
+    		myOutput.write(buffer, 0, length);
+    	}
+     
+    	//Close the streams
+    	myOutput.flush();
+    	myOutput.close();
+    	myInput.close();
+     
+    }
+     
+    
+    public void openDataBase() throws SQLException{
+    	String myPath = DB_PATH + DB_NAME;
+    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+    }
+     
+    @Override
+    public synchronized void close() { 
+    	if(myDataBase != null)
+    		myDataBase.close();
+    	super.close();
+    }
 
 	@Override
-	public void onCreate(SQLiteDatabase sqLiteDatabase) {
-		String CREATE_TABLE_QUESTION = "CREATE TABLE "+ TABLE_QUESTION +"("+
-				COLUMN_ID + " INTEGER PRIMARY KEY autoincrement," +
-				COLUMN_TEXT + " TEXT," +
-				COLUMN_DIFFICULTY + " INTEGER, "+
-				COLUMN_TOPIC + " TEXT);";
-		
-		String CREATE_TABLE_ANSWER = "CREATE TABLE "+ TABLE_ANSWER + "("+
-				COLUMN_ID_ANSWER + " INTEGER PRIMARY KEY autoincrement,"+
-				COLUMN_ID_QUESTION_FK + " INTEGER,"+
-				COLUMN_TEXT_ANSWER + " TEXT" +
-				COLUMN_CORRECT + " INTEGER);";
-		
-		sqLiteDatabase.execSQL(CREATE_TABLE_QUESTION);
-		sqLiteDatabase.execSQL(CREATE_TABLE_ANSWER);
-		
-		_should_fill = true;
+	public void onCreate(SQLiteDatabase db) {		
 	}
 
 	@Override
-	public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_QUESTION);
-		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ANSWER);
-		onCreate(sqLiteDatabase);		
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		
 	}
-
-
+	
+	
+	
+	public Map<Question, ArrayList<Answer>> getQuestionWithAnswers(long quest_number){
+		//quest_number is the number of the question or difficulty(in db)
+		
+		//first we will select the important question
+		Cursor cursor = myDataBase.rawQuery(
+		"SELECT * FROM Question WHERE id_qstn=?;",
+						new String[] { String.valueOf(quest_number) });
+		
+		//let's get the selected question
+		Question question = new Question(
+				cursor.getLong(cursor.getColumnIndex("id_qstn")),
+				cursor.getString(cursor.getColumnIndex("text")),
+				quest_number,
+				cursor.getString(cursor.getColumnIndex("topic"))				
+				);
+		
+		//this is the id of the question
+		long id = cursor.getLong(cursor.getColumnIndex("id_qstn"));
+		cursor.close();
+		
+		//let's select the answers for this question
+		Cursor curs = myDataBase.rawQuery(
+				"SELECT * FROM Answer WHERE id_qstn = ?;",
+			     new String[] { String.valueOf(id) }
+				);
+		
+		ArrayList<Answer> ans = new ArrayList<Answer>();
+		if(curs != null){
+			if (curs.moveToFirst()){
+				do{
+					Answer answer = new Answer(
+							curs.getLong(curs.getColumnIndex("id_answer")),
+							curs.getString(curs.getColumnIndex("text_answer")),
+							id,
+							curs.getLong(curs.getColumnIndex("correct"))
+							);
+					ans.add(answer);
+				} while(curs.moveToNext());
+			}
+		};
+		
+		Map<Question, ArrayList<Answer>> result = new LinkedHashMap<Question, ArrayList<Answer>>();
+		result.put(question, ans);
+		
+		return result;	
+	}
+	
+	
+     
 }
+     
