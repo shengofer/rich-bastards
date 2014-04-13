@@ -18,7 +18,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper{
     @SuppressLint("SdCardPath")
-	private static String DB_PATH = "/data/data/db/databases/RichBastard"; 
+	private static String DB_PATH = "/data/data/db/databases/"; 
     private static String DB_NAME = "RichBastard";     
     private SQLiteDatabase myDataBase;    
     private final Context myContext;
