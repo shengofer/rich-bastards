@@ -42,8 +42,7 @@ public class TestQuestion
 		shuffle();
 	}
 	
-	public String getCorrectAnswer()
-	{
+	public String getCorrectAnswer(){
 		return correct_answer;
 	}
 	
