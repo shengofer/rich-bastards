@@ -16,9 +16,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+@SuppressLint("SdCardPath")
 public class DataBaseHelper extends SQLiteOpenHelper{
-    @SuppressLint("SdCardPath")
-	private static String DB_PATH = "/data/data/db/databases/"; 
+	private static String DB_PATH = "/data/data/assets/databases/"; 
     private static String DB_NAME = "RichBastard";     
     private SQLiteDatabase myDataBase;    
     private final Context myContext;
@@ -119,6 +119,8 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 				quest_number,
 				cursor.getString(cursor.getColumnIndex("topic"))				
 				);
+		
+		System.out.println(question.getText()+" ; "+question.get_difficulty());
 		
 		//this is the id of the question
 		long id = cursor.getLong(cursor.getColumnIndex("id_qstn"));
