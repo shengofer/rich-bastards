@@ -95,7 +95,7 @@ public class AudioPlayer
 	        int soundID = (curTheme == Theme.Classic 
 	        		? classicPreQuestionId[question]
 	        		: originalPreQuestionId[question]);
-	        play(musicMediaPlayer, soundID);
+	        playMusic(soundID);
     	}
     }
 
@@ -108,7 +108,7 @@ public class AudioPlayer
 	        int soundID = (curTheme == Theme.Classic 
 	        		? classicQuestionId[question]
 	        		: originalQuestionId[question]);
-	        play(musicMediaPlayer, soundID);
+	        playMusic(soundID);
     	}
     }
     
@@ -121,7 +121,7 @@ public class AudioPlayer
 	        int soundID = (curTheme == Theme.Classic 
 	        		? classicFinalAnswerId[question]
 	        		: originalFinalAnswerId[question]);
-	        play(musicMediaPlayer, soundID);
+	        playMusic(soundID);
     	}
     }
     
@@ -134,7 +134,7 @@ public class AudioPlayer
 	        int soundID = (curTheme == Theme.Classic 
 	        		? classicCorrectAnswerId[question]
 	        		: originalCorrectAnswerId[question]);
-	        play(musicMediaPlayer, soundID);
+	        playMusic(soundID);
     	}
     }
     
@@ -147,7 +147,7 @@ public class AudioPlayer
 	        int soundID = (curTheme == Theme.Classic 
 	        		? classicWrongAnswerId[question]
 	        		: originalWrongAnswerId[question]);
-	        play(effectMediaPlayer, soundID);
+	        playEffect(soundID);
     	}
     }
     
@@ -155,6 +155,7 @@ public class AudioPlayer
     {
     	if (effectsEnabled)
     	{
+    		releaseEffectsPlayer();
         	effectMediaPlayer = MediaPlayer.create(mainContext, R.raw.fifty_fifty);
         	effectMediaPlayer.setLooping(false);
         	effectMediaPlayer.start();   		
@@ -163,24 +164,41 @@ public class AudioPlayer
 
     public void stopPlaying()
     {
-        releasePlayer(musicMediaPlayer);
-        releasePlayer(effectMediaPlayer);
+        releaseMusicPlayer();
+        releaseEffectsPlayer();
     }
     
-    private void play(MediaPlayer player, int soundID)
+    private void playMusic(int soundID)
     {
-    	player = MediaPlayer.create(mainContext, soundID);
-    	player.setLooping(false);
-    	player.start();
+    	musicMediaPlayer = MediaPlayer.create(mainContext, soundID);
+    	musicMediaPlayer.setLooping(false);
+    	musicMediaPlayer.start();
+    }
+    
+    private void playEffect(int soundID)
+    {
+    	effectMediaPlayer = MediaPlayer.create(mainContext, soundID);
+    	effectMediaPlayer.setLooping(false);
+    	effectMediaPlayer.start();
     }
 
-    private void releasePlayer(MediaPlayer player)
+    private void releaseMusicPlayer()
     {
-        if (player != null)
+        if (musicMediaPlayer != null)
         {
-        	player.stop();
-        	player.release();
-        	player = null;
+        	musicMediaPlayer.stop();
+        	musicMediaPlayer.release();
+        	musicMediaPlayer = null;
+        }
+    }
+    
+    private void releaseEffectsPlayer()
+    {
+        if (effectMediaPlayer != null)
+        {
+        	effectMediaPlayer.stop();
+        	effectMediaPlayer.release();
+        	effectMediaPlayer = null;
         }
     }
     
