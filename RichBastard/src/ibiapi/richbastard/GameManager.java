@@ -337,30 +337,5 @@ public class GameManager
 		mQuestionNumber = 6;
 		playCurrentQuestion();
 	}
-	
 
-	
-/*	  OnClickListener myClickListener = new OnClickListener() {
-		    public void onClick1(DialogInterface dialog, int which) {
-		      switch (which) {
-		      // положительная кнопка
-		      case Dialog.BUTTON_POSITIVE:
-		        saveData();
-		        finish();
-		        break;
-		      // негаитвная кнопка
-		      case Dialog.BUTTON_NEGATIVE:
-		        finish();
-		        break;
-		      // нейтральная кнопка  
-		      case Dialog.BUTTON_NEUTRAL:
-		        break;
-		      }
-		    }
-
-
-		  };*/
-		  
-		  
-	
 }
