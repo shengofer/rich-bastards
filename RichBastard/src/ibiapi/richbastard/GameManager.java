@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.view.View;
@@ -35,6 +39,8 @@ public class GameManager
     private boolean canUseLifelines;
     
     private static final int numberOfQuestions = 15;
+    
+
     
     private GameManager() {}
     
@@ -120,14 +126,16 @@ public class GameManager
 							}
 							else
 							{
-								// TODO: congratulate the winner
+								//  congratulate the winner
+								mActivity.showWinDialog();
 							}
 						}
 					}, PAUSE_BETWEEN_QUESTIONS);
 				}
 				else
 				{
-					// TODO: present our condolences to the user
+					// present our condolences to the user
+					mActivity.showCondDialog();
 				}
 			}		
 		}, PAUSE_AMOUNT);
@@ -329,5 +337,30 @@ public class GameManager
 		mQuestionNumber = 6;
 		playCurrentQuestion();
 	}
+	
+
+	
+/*	  OnClickListener myClickListener = new OnClickListener() {
+		    public void onClick1(DialogInterface dialog, int which) {
+		      switch (which) {
+		      // положительная кнопка
+		      case Dialog.BUTTON_POSITIVE:
+		        saveData();
+		        finish();
+		        break;
+		      // негаитвная кнопка
+		      case Dialog.BUTTON_NEGATIVE:
+		        finish();
+		        break;
+		      // нейтральная кнопка  
+		      case Dialog.BUTTON_NEUTRAL:
+		        break;
+		      }
+		    }
+
+
+		  };*/
+		  
+		  
 	
 }

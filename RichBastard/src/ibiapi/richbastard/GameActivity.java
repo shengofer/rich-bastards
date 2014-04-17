@@ -2,8 +2,11 @@ package ibiapi.richbastard;
 
 import ibiapi.richbastard.AudioPlayer.Theme;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,7 +16,6 @@ public class GameActivity extends Activity
 	private static GameManager mGameManager;
 	private static AudioPlayer mAudioPlayer;
 	
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
@@ -21,6 +23,7 @@ public class GameActivity extends Activity
         initGameManager();
         mGameManager.startGame();
         initButtons();
+
     }
 
 
@@ -134,5 +137,56 @@ public class GameActivity extends Activity
         for (int i = 0; i < 4; ++i)
         	findViewById(percIds[i]).setVisibility(View.INVISIBLE);   
     }
+	
+	protected Dialog onCreateDialog(int id) {
+		   //   if (id == DIALOG_EXIT) {
+		AlertDialog.Builder adb = new AlertDialog.Builder(this);
+		switch (id) {
+			//player win
+			case 1:{
+				        
+				        adb.setTitle(R.string.end);
+				        adb.setMessage(R.string.congratz);	       
+				      //  adb.setIcon(android.R.drawable.ic_dialog_info);	        
+				     //  adb.setPositiveButton(R.string.ok, myClickListener);
+				        break;
+			}
+			//player lose
+			case 2:{
+				adb.setTitle(R.string.end);
+				adb.setMessage(R.string.condolence);
+				break;
+			}
+			//TODO: for take money
+			default:{
+				break;
+			}
+		}
+	        adb.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+	            @Override
+	            public void onClick(DialogInterface arg0, int arg1) {
+    				Intent menu = new Intent();
+                    menu.setClass(GameActivity.this, MenuActivity.class);
+                    startActivity(menu);
+	            }
+	        });
+		        // create dialog
+		        return adb.create();
+		 //    }
+		  //    return onCreateDialog(id);
+		    }
+	
+    public void showWinDialog() {
+		// create alert dialog
+		Dialog Dialog = onCreateDialog(1);
+		// show it
+		Dialog.show();
+      }
+    
+    public void showCondDialog(){
+    	Dialog Dialog = onCreateDialog(2);
+    	Dialog.show();
+    }
+      
 
 }
