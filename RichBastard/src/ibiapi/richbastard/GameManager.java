@@ -41,7 +41,6 @@ public class GameManager
     private static final int numberOfQuestions = 15;
     
 
-    
     private GameManager() {}
     
     public static GameManager getInstance()
@@ -104,7 +103,7 @@ public class GameManager
 	{
 		makeChoosable(false);
 		canUseLifelines = false;
-		hideVotingResults();
+		hideVotingResults(false);
 		mAnswerViews[answer].setBackgroundResource(R.drawable.final_answer);
 		mAudioPlayer.playFinalAnswer(mQuestionNumber);
 		h.postDelayed(new Runnable() 
@@ -206,7 +205,6 @@ public class GameManager
 				mPercentageViews[ans].setText(String.format("%d%%", percents[posAns]));
 				++posAns;
 			}
-		// TODO: what if a player used the "50:50" lifeline after the "Ask for audience" one?
 	}
 	
 	private void displayVotingResults()
@@ -223,13 +221,15 @@ public class GameManager
     	simulateVoting();
 	}
 	
-	private void hideVotingResults()
+	private void hideVotingResults(boolean fiftyFifty)
 	{
 		if (mPercentageViews != null)
 		{
 			for (int i = 0; i < 4; ++i)
-				mPercentageViews[i].setVisibility(View.GONE);
-			mPercentageViews = null;
+				if (!fiftyFifty || (fiftyFifty && isAnswerCleared(i)))
+					mPercentageViews[i].setVisibility(View.GONE);
+			if (!fiftyFifty)
+				mPercentageViews = null;
 		}
 	}
 	
@@ -237,8 +237,6 @@ public class GameManager
 	{
 		if (canUseLifelines)
 		{
-			// TODO: should I not clear all the percentage?
-			hideVotingResults();
 			ArrayList<Integer> a = new ArrayList<Integer>();
 			for (int i = 0; i < 4; i++)
 				if (!isAnswerCorrect(i))
@@ -246,6 +244,7 @@ public class GameManager
 			Collections.shuffle(a);
 			clearAnswer(a.get(0));
 			clearAnswer(a.get(1));
+			hideVotingResults(true);
 			mAudioPlayer.playFiftyFifty();
 			return true;
 		}
@@ -256,7 +255,7 @@ public class GameManager
 	{
 		if (canUseLifelines)
 		{
-			hideVotingResults();
+			hideVotingResults(false);
 			playCurrentQuestion();
 			return true;
 			// TODO: AudioPlayer.playSomething()
@@ -334,8 +333,11 @@ public class GameManager
 	
 	public void startGame()
 	{
-		mQuestionNumber = 6;
-		playCurrentQuestion();
+		if (mQuestionNumber == 0)
+		{
+			mQuestionNumber = 6;
+			playCurrentQuestion();
+		}
 	}
 
 }

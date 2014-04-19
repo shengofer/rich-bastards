@@ -16,28 +16,30 @@ public class TestQuestion
 	private String[] answer_options;
 	private String correct_answer;
 	
+	private String question; // TODO: comment this line
+	
 	public TestQuestion()
 	{
-		/*
+		
 		question = "Who discovered America?";
 		answer_options = new String[4];
 		answer_options[0] = "Vasco da Gama";
 		answer_options[1] = "Marko Polo";
 		answer_options[2] = "Christopher Columbus";
 		answer_options[3] = "Hernan Cortes";
-		correct_answer = "Christopher Columbus";*/
-		DataBaseHelper db = App.db;
-		Map<Question, ArrayList<Answer>> result = db.getQuestionWithAnswers(10);
-		quest = (Question) result.keySet();
-		
-		int i = 0;
-		for(ArrayList<Answer> val: result.values()){
-			if(val.get(i).getCorrect() == 1){
-				correct_answer = val.get(i).getAnswer_text();
-			}
-			answer_options[i] = val.get(i).getAnswer_text();
-			i++;
-		}
+		correct_answer = "Christopher Columbus";
+//		DataBaseHelper db = App.db;
+//		Map<Question, ArrayList<Answer>> result = db.getQuestionWithAnswers(10);
+//		quest = (Question) result.keySet();
+//		
+//		int i = 0;
+//		for(ArrayList<Answer> val: result.values()){
+//			if(val.get(i).getCorrect() == 1){
+//				correct_answer = val.get(i).getAnswer_text();
+//			}
+//			answer_options[i] = val.get(i).getAnswer_text();
+//			i++;
+//		}
 		
 		shuffle();
 	}
@@ -48,7 +50,8 @@ public class TestQuestion
 	
 	public String getQuestion()
 	{
-		return quest.getText();
+		//return quest.getText();
+		return question;
 	}
 	
 	public String[] getAnswerOptions()
