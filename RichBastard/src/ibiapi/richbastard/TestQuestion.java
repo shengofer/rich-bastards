@@ -12,22 +12,30 @@ import db.Question;
 
 public class TestQuestion 
 {
-	private Question quest;
-	private String[] answer_options;
+	private Question question;
+	private Answer[] answer_options;
 	private String correct_answer;
 	
-	private String question; // TODO: comment this line
-	
-	public TestQuestion()
+	public TestQuestion(Question q, Answer[] answers)
 	{
+		setQuestion(q);
+		setAnswerOptions(answers);
+		shuffle();
+		for (int i = 0; i < 4; ++i)
+			if (answers[i].getCorrect() == 1)
+			{
+				correct_answer = answers[i].getAnswer_text();
+				break;
+			}
 		
-		question = "Who discovered America?";
-		answer_options = new String[4];
-		answer_options[0] = "Vasco da Gama";
-		answer_options[1] = "Marko Polo";
-		answer_options[2] = "Christopher Columbus";
-		answer_options[3] = "Hernan Cortes";
-		correct_answer = "Christopher Columbus";
+//		question = "Who discovered America?";
+//		answer_options = new Answer[4];
+//		answer_options[0].setAnswer_text("Vasco da Gama");
+//		answer_options[1].setAnswer_text("Marko Polo");
+//		answer_options[2].setAnswer_text("Christopher Columbus");
+//		answer_options[3].setAnswer_text("Hernan Cortes");
+//		correct_answer = "Christopher Columbus";
+		
 //		DataBaseHelper db = App.db;
 //		Map<Question, ArrayList<Answer>> result = db.getQuestionWithAnswers(10);
 //		quest = (Question) result.keySet();
@@ -41,22 +49,37 @@ public class TestQuestion
 //			i++;
 //		}
 		
-		shuffle();
+		//shuffle();
 	}
 	
-	public String getCorrectAnswer(){
+	public String getCorrectAnswer()
+	{
 		return correct_answer;
 	}
 	
 	public String getQuestion()
 	{
-		//return quest.getText();
-		return question;
+		return question.getText();
+		//return question;
+	}
+	public void setQuestion(Question q)
+	{
+		question = q;
 	}
 	
-	public String[] getAnswerOptions()
+//	public Answer[] getAnswerOptions()
+//	{
+//		return answer_options;
+//	}
+	
+	public String getAnswerOption(int index)
 	{
-		return answer_options;
+		return answer_options[index].getAnswer_text();
+	}
+	
+	public void setAnswerOptions(Answer[] options)
+	{
+		answer_options = options;
 	}
 	
 	private void shuffle()

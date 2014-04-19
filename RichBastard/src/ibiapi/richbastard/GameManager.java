@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import db.Question;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -17,6 +19,7 @@ public class GameManager
 {
 	private static GameManager mGameManager;
 	private static AudioPlayer mAudioPlayer;
+	private static QuestionsManager mQuestionsManager;
 	
     private final long PAUSE_AMOUNT = 5000;
     private final long PAUSE_BETWEEN_QUESTIONS = 7000;
@@ -27,7 +30,7 @@ public class GameManager
     private TestQuestion mQuestion;
     
 	private TextView[] mAnswerViews;
-    private String[] mAnswerOptions;
+    //private String[] mAnswerOptions;
     
     private TextView[] mPercentageViews;
     
@@ -40,8 +43,16 @@ public class GameManager
     
     private static final int numberOfQuestions = 15;
     
-
-    private GameManager() {}
+    private TestQuestion[] mQuestions;
+    
+    private void loadQuestions(String topic)
+    {
+    	mQuestions = mQuestionsManager.retrieveQuestions(topic);
+    }
+    
+    private GameManager()
+    {
+    }
     
     public static GameManager getInstance()
     {
@@ -49,6 +60,7 @@ public class GameManager
     	{
     		mGameManager = new GameManager();
     		mAudioPlayer = AudioPlayer.getInstance();
+    		mQuestionsManager = QuestionsManager.getInstance();
     	}
     	return mGameManager;
     }
@@ -56,8 +68,8 @@ public class GameManager
 	public void playCurrentQuestion()
 	{
 		clearQuestion();
-		mQuestion = new TestQuestion();
-		mAnswerOptions = mQuestion.getAnswerOptions();
+		mQuestion = mQuestions[mQuestionNumber-1]; //new TestQuestion();
+		//mAnswerOptions = mQuestion.getAnswerOptions();
         mAudioPlayer.playPreQuestion(mQuestionNumber);
         h.postDelayed(new Runnable() {
 			@Override
@@ -75,9 +87,9 @@ public class GameManager
 		for (int i = 0; i < 4; i++)
 		{
 			mAnswerViews[i].setBackgroundResource(R.drawable.answer_option);
-			mAnswerViews[i].setText(letters[i] + ": " + mAnswerOptions[i]);
+			mAnswerViews[i].setText(letters[i] + ": " + mQuestion.getAnswerOption(i));
 			mAnswerViews[i].setClickable(true);
-			if (mQuestion.getCorrectAnswer() == mAnswerOptions[i])
+			if (mQuestion.getCorrectAnswer().equals(mQuestion.getAnswerOption(i)))
 				mCorrectId = i;
 		}
         makeChoosable(true);
@@ -256,6 +268,7 @@ public class GameManager
 		if (canUseLifelines)
 		{
 			hideVotingResults(false);
+			mQuestions[mQuestionNumber-1] = mQuestionsManager.retrieveAdditionalQuestion(mQuestionNumber);
 			playCurrentQuestion();
 			return true;
 			// TODO: AudioPlayer.playSomething()
@@ -333,11 +346,15 @@ public class GameManager
 	
 	public void startGame()
 	{
-		if (mQuestionNumber == 0)
-		{
-			mQuestionNumber = 6;
-			playCurrentQuestion();
-		}
+    	// without a certain topic yet
+    	loadQuestions(null);
+		mQuestionNumber = 6;
+		playCurrentQuestion();
+	}
+	
+	public static int getNumberOfQuestions()
+	{
+		return numberOfQuestions;
 	}
 
 }

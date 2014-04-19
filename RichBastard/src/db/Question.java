@@ -1,11 +1,14 @@
 package db;
 
+import java.util.ArrayList;
+
 public class Question {
 	
 	private long id_qstn;
 	private String text;
 	private long difficulty; //means the number of the question
 	private String topic;
+	//private Answer[] answers = new Answer[4];
 
 	public Question(){
 	}
@@ -54,5 +57,13 @@ public class Question {
 	public void setText(String text) {
 		this.text = text;
 	}
+	
+//	public Answer[] getAnswers() {
+//		return answers;
+//	}
+//
+//	public void setAnswers(Answer[] answers) {
+//		this.answers = answers;
+//	}
 	
 }

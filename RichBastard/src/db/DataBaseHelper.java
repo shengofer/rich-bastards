@@ -1,5 +1,7 @@
 package db;
 
+import ibiapi.richbastard.TestQuestion;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -103,8 +105,10 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 	}
 	
 	
-	
-	public Map<Question, ArrayList<Answer>> getQuestionWithAnswers(long quest_number){
+	// TODO: select a question randomly
+	// hint: SELECT * FROM table ORDER BY RANDOM() LIMIT 1;
+	// more TODO: retrieve a question which id is not equal to a specified id
+	public TestQuestion getQuestionWithAnswers(long quest_number){
 		//quest_number is the number of the question or difficulty(in db)
 		
 		//first we will select the important question
@@ -119,6 +123,7 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 				quest_number,
 				cursor.getString(cursor.getColumnIndex("topic"))				
 				);
+		
 		
 		System.out.println(question.getText()+" ; "+question.get_difficulty());
 		
@@ -147,10 +152,13 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 			}
 		};
 		
-		Map<Question, ArrayList<Answer>> result = new LinkedHashMap<Question, ArrayList<Answer>>();
-		result.put(question, ans);
 		
-		return result;	
+//		Map<Question, ArrayList<Answer>> result = new LinkedHashMap<Question, ArrayList<Answer>>();
+//		result.put(question, ans);
+//		
+//		return result;	
+		
+		return new TestQuestion(question,(Answer[])ans.toArray());
 	}
 	
 	
