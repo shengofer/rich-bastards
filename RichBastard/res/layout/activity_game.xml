@@ -172,4 +172,13 @@
         android:layout_marginTop="14dp"
         android:text="Ask for audience" />
 
+    <Button
+        android:id="@+id/takeMoneyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/askForAudienceButton"
+        android:layout_alignBottom="@+id/askForAudienceButton"
+        android:layout_toLeftOf="@+id/askForAudienceButton"
+        android:text="Take money" />
+
 </RelativeLayout>

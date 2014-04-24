@@ -23,7 +23,7 @@
     <string name="end">End</string>
     <string name="congratz">Congratulation.You have won.Press OK to return on main menu.</string>
     <string name="condolence">What\'s a pity.You are loser.Press OK to return on main menu.</string>
-    <string name="takemoney">Congratulation.You take money</string>
+    <string name="takemoney">Congratulation.You take money.Press OK to return on main menu.</string>
     <string name="ok">OK</string>
     <!-- END Game dialog -->
 

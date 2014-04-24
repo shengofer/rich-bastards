@@ -118,6 +118,16 @@ public class GameActivity extends Activity
 			}
 		});
         
+        final Button takeMoneyButton = (Button) findViewById(R.id.takeMoneyButton);
+        takeMoneyButton.setOnClickListener(new View.OnClickListener() 
+        {
+            @Override
+            public void onClick(View view) 
+            {
+                showTakeMoneyDialog();
+            }
+        });
+        
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
         {
@@ -157,7 +167,12 @@ public class GameActivity extends Activity
 				adb.setMessage(R.string.condolence);
 				break;
 			}
-			//TODO: for take money
+			// for take money
+			case 3:{
+				adb.setTitle(R.string.end);
+				adb.setMessage(R.string.takemoney);
+				break;
+			}
 			default:{
 				break;
 			}
@@ -185,6 +200,11 @@ public class GameActivity extends Activity
     
     public void showCondDialog(){
     	Dialog Dialog = onCreateDialog(2);
+    	Dialog.show();
+    }
+    
+    public void showTakeMoneyDialog(){
+    	Dialog Dialog = onCreateDialog(3);
     	Dialog.show();
     }
       
