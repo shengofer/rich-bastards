@@ -60,7 +60,7 @@
             android:layout_alignParentStart="false"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/answer_option"
+            android:background="@drawable/question_field"
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingLeft="0dp"
@@ -73,7 +73,7 @@
         <TextView
             android:id="@+id/variant_a"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_alignLeft="@+id/question_field"
             android:layout_alignParentEnd="false"
             android:layout_alignParentStart="false"
@@ -81,12 +81,14 @@
             android:layout_below="@+id/question_field"
             android:layout_marginTop="15dp"
             android:background="@drawable/answer_option"
+            android:gravity="top"
+            android:textAlignment="gravity"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/variant_c"
             android:layout_width="140dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_alignLeft="@+id/variant_b"
             android:layout_alignParentEnd="false"
             android:layout_alignParentStart="false"
@@ -101,7 +103,7 @@
         <TextView
             android:id="@+id/variant_b"
             android:layout_width="140dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_alignLeft="@+id/variant_a"
             android:layout_alignParentEnd="false"
             android:layout_alignParentStart="false"
@@ -114,7 +116,7 @@
         <TextView
             android:id="@+id/variant_d"
             android:layout_width="140dp"
-            android:layout_height="30dp"
+            android:layout_height="35dp"
             android:layout_alignLeft="@+id/variant_c"
             android:layout_alignParentEnd="false"
             android:layout_alignParentStart="false"

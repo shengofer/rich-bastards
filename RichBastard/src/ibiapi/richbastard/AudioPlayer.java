@@ -171,7 +171,7 @@ public class AudioPlayer
     private void playMusic(int soundID)
     {
     	musicMediaPlayer = MediaPlayer.create(mainContext, soundID);
-    	musicMediaPlayer.setLooping(false);
+    	musicMediaPlayer.setLooping(true);
     	musicMediaPlayer.start();
     }
     
