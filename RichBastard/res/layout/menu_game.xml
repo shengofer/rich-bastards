@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+ <!--  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#fff" >
-    
-    <TextView
+    android:background="#4385f5" >
+
+    <!-- <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -11,58 +13,77 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
         android:text="@string/app_name"
-        android:textSize="50sp" 
-        android:textColor="#000"/>
+        android:textColor="#000"
+        android:textSize="50sp" /> -->
+    
+    
+    <ImageView
+        android:id="@+id/logo_view"
+        android:src="@drawable/logo_view"
+        android:layout_width="300dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:clickable="false" />
+    
+
+    <!--
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+    -->
+
+	<Button
+	    android:id="@+id/menuStartBtn"
+	    android:layout_width="220dp"
+	    android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+	    android:layout_below="@+id/logo_view"
+	    android:layout_marginTop="70dp"
+	    android:background="@drawable/menu_button"
+	    android:text="@string/menu_start"
+	    android:textColor="#000"
+	    android:textSize="25sp" />
 
     <Button
-        android:id="@+id/menuStartBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="180dp"
-        android:text="@string/menu_start"
-        android:textSize="30sp" 
-        android:textColor="#000"
-        android:background="#fff"/>
-    
-    <Button
         android:id="@+id/menuSettingsBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp"
+	    android:layout_below="@+id/menuStartBtn"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/menu_button"
         android:text="@string/menu_settings"
-        android:textSize="30sp" 
         android:textColor="#000"
-        android:background="#fff"/>
-        
-     <Button
+        android:textSize="25sp" />
+
+    <Button
         android:id="@+id/menuHelpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="260dp"
+	    android:layout_below="@+id/menuSettingsBtn"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/menu_button"
         android:text="@string/menu_help"
-        android:textSize="30sp" 
         android:textColor="#000"
-        android:background="#fff"/>
-     
-     <Button
-         android:id="@+id/menuExitBtn"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:textSize="25sp" />
+
+          
+    
+
+    <Button
+        android:id="@+id/menuExitBtn"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
+	    android:layout_below="@+id/menuHelpBtn"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/menu_button"
         android:text="@string/menu_exit"
-        android:textSize="30sp" 
         android:textColor="#000"
-        android:background="#fff"/>
-     
-     <ImageView
+        android:textSize="25sp" />
+    
+    <ImageView
                 android:id="@+id/splashscreen"
                 android:contentDescription="@string/splash_description"
                 android:layout_width="fill_parent"
@@ -70,7 +91,5 @@
                 android:src="@drawable/splash"
                 android:layout_gravity="center"/>
     
+
 </RelativeLayout>
-
-
-

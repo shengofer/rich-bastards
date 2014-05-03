@@ -1,34 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="#4385f5">
 
-    <Button
-        android:id="@+id/classicGameButton"
+    <ImageView
+        android:id="@+id/logo_view"
+        android:src="@drawable/logo_view"
+        android:layout_width="300dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:clickable="false" />
+    
+    
+
+
+    <TextView
+        android:id="@+id/GameModeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="104dp"
-        android:layout_marginTop="97dp"
-        android:text="Classic game" />
+        android:layout_centerHorizontal="true"
+	    android:layout_below="@+id/logo_view"
+        android:layout_marginTop="30dp"
+        android:text="Choose game mode"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff" />
+    
+    <Button
+        android:id="@+id/classicGameButton"
+	    android:layout_width="220dp"
+	    android:layout_height="50dp"
+	    android:layout_below="@+id/GameModeLabel"
+	    android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_button"
+        android:text="Classic" 
+	    android:textSize="25sp"/>
 
     <Button
         android:id="@+id/thematicalGameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/classicGameButton"
-        android:layout_below="@+id/classicGameButton"
-        android:layout_marginTop="43dp"
-        android:text="Thematical game" />
+	    android:layout_width="220dp"
+	    android:layout_height="50dp"
+	    android:layout_below="@+id/classicGameButton"
+	    android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_button"
+        android:text="Thematic" 
+	    android:textSize="25sp"/>
 
     <Button
         android:id="@+id/blitzGameButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/thematicalGameButton"
-        android:layout_below="@+id/thematicalGameButton"
-        android:layout_marginTop="45dp"
-        android:text="Blitz game" />
+	    android:layout_width="220dp"
+	    android:layout_height="50dp"
+	    android:layout_below="@+id/thematicalGameButton"
+	    android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_button"
+        android:text="Blitz" 
+	    android:textSize="25sp"/>
 
 </RelativeLayout>

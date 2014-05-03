@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="#4385f5">
 
-    <ListView
-        android:id="@+id/topicslistView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/chooseTopicTextView"
-        android:layout_marginTop="110dp" >
-    </ListView>
-
+    
+     <ImageView
+        android:id="@+id/logo_view"
+        android:src="@drawable/logo_view"
+        android:layout_width="300dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:clickable="false" />
+     
+     
     <TextView
         android:id="@+id/chooseTopicTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="86dp"
-        android:layout_marginTop="22dp"
+	    android:layout_below="@+id/logo_view"
+        android:layout_marginTop="30dp"
         android:text="Choose a topic"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#fff"/>
+    
+    <ListView
+        android:id="@+id/topicslistView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chooseTopicTextView"
+        android:layout_centerHorizontal="true"
+        
+        android:layout_marginTop="50dp" >
+    </ListView>
+
 
 </RelativeLayout>

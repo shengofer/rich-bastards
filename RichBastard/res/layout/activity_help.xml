@@ -1,4 +1,26 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
- android:layout_height="match_parent" 
- android:layout_width="match_parent"
- android:text="@string/test_help" />
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#4385f5">
+
+
+       <ImageView
+        android:id="@+id/logo_view"
+        android:src="@drawable/logo_view"
+        android:layout_width="300dp"
+        android:layout_height="66dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:clickable="false" />
+    
+	<TextView
+	 android:layout_height="match_parent" 
+	 android:layout_width="match_parent"
+	 android:text="@string/test_help"
+	    android:layout_below="@+id/logo_view"
+        android:layout_marginTop="30dp"
+	 />
+
+    
+</RelativeLayout>
