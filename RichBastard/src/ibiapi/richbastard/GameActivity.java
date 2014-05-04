@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
@@ -124,7 +125,11 @@ public class GameActivity extends Activity
             @Override
             public void onClick(View view) 
             {
-                showTakeMoneyDialog();
+        		Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+				    public void run() {
+				    	showTakeMoneyDialog();
+				    }}, 3000);      
             }
         });
         

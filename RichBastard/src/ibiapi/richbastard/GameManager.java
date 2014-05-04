@@ -138,7 +138,12 @@ public class GameManager
 							else
 							{
 								//  congratulate the winner
-								mActivity.showWinDialog();
+								Handler handler = new Handler();
+								handler.postDelayed(new Runnable() {
+								    public void run() {
+								    	mActivity.showWinDialog();
+								    }}, 3000); 
+								
 							}
 						}
 					}, PAUSE_BETWEEN_QUESTIONS);
@@ -146,7 +151,12 @@ public class GameManager
 				else
 				{
 					// present our condolences to the user
-					mActivity.showCondDialog();
+					Handler handler = new Handler();
+					handler.postDelayed(new Runnable() {
+					    public void run() {
+					    	mActivity.showCondDialog();
+					    }}, 3000);
+					
 				}
 			}		
 		}, PAUSE_AMOUNT);
