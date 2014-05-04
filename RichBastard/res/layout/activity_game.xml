@@ -9,38 +9,76 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="whowantstobeamillionaire.app.MainActivity" >
+    tools:context="whowantstobeamillionaire.app.MainActivity"
+    android:background="#000" >
 
-    <ImageView
+<!--     <ImageView
         android:id="@+id/experimental_rat"
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_below="@+id/correctButton"
         android:layout_centerHorizontal="true"
-        android:clickable="false" />
-
-    <ibiapi.fontpackage.MyButtonFont
+        android:clickable="false" /> -->
+    
+    
+   <!-- <ibiapi.fontpackage.MyButtonFont
 	    style="@style/button"
-        android:id="@+id/fiftyFiftyButton"
+        android:id="@+id/takeMoneyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:text="Take money" /> -->
+   
+   <LinearLayout
+       android:id="@+id/lifelinesLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+	    android:background="@drawable/head"
+	    android:gravity="center|bottom"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp" >
+       
+    	<ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
+        android:id="@+id/fiftyFiftyButton"
+        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginTop="29dp"
-        android:text="50:50" />
+        android:layout_marginLeft="15dp"
+        android:text="50:50"
+        android:textSize="12sp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button_hint" />
+       
+       <ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
+        android:id="@+id/askForAudienceButton"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:text="Audience"
+        android:textSize="12sp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button_hint" />
+
 
     <ibiapi.fontpackage.MyButtonFont
 	    style="@style/button"
         android:id="@+id/changeQuestionButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="19dp"
-        android:layout_marginTop="29dp"
-        android:text="Change question" />
+        android:layout_weight="1"
+        android:layout_height="40dp"
+        android:layout_marginRight="15dp"
+        android:text="Change"
+        android:textSize="12sp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/button_hint"/>
+       
+   </LinearLayout>
+	   
+    
 
     <RelativeLayout
         android:id="@+id/question_layout"
@@ -50,14 +88,18 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="20dp"
+	    android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp" 
         android:focusableInTouchMode="false"
+        android:layout_below="@+id/lifelinesLayout"
+        android:layout_marginTop="40dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp" >
 
         <ibiapi.fontpackage.MyTextViewFont
 	    	style="@style/button"          
             android:id="@+id/question_field"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_alignParentEnd="false"
             android:layout_alignParentStart="false"
@@ -144,7 +186,7 @@
             android:layout_alignRight="@+id/variant_a"
             android:layout_alignTop="@+id/variant_a"
             android:text="%1"
-            android:background="#80ffffff"
+            android:background="#80000000"
             android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <ibiapi.fontpackage.MyTextViewFont
@@ -156,7 +198,7 @@
             android:layout_alignRight="@+id/variant_b"
             android:layout_alignTop="@+id/variant_b"
             android:text="%2"
-            android:background="#80ffffff"
+            android:background="#80000000"
             android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <ibiapi.fontpackage.MyTextViewFont
@@ -168,7 +210,7 @@
             android:layout_alignRight="@+id/variant_c"
             android:layout_alignTop="@+id/variant_c"
             android:text="%3"
-            android:background="#80ffffff"
+            android:background="#80000000"
             android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <ibiapi.fontpackage.MyTextViewFont
@@ -179,30 +221,12 @@
             android:layout_alignRight="@+id/variant_d"
             android:layout_alignTop="@+id/variant_d"
             android:text="%4"
-            android:background="#80ffffff"
+            android:background="#80000000"
             android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>
 
-    <ibiapi.fontpackage.MyButtonFont
-	    style="@style/button"
-        android:id="@+id/askForAudienceButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/experimental_rat"
-        android:layout_below="@+id/fiftyFiftyButton"
-        android:layout_marginTop="14dp"
-        android:text="Ask for audience" />
-
-    <ibiapi.fontpackage.MyButtonFont
-	    style="@style/button"
-        android:id="@+id/takeMoneyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/askForAudienceButton"
-        android:layout_alignBottom="@+id/askForAudienceButton"
-        android:layout_toLeftOf="@+id/askForAudienceButton"
-        android:text="Take money" />
+    
 
 </RelativeLayout>

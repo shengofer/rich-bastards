@@ -121,19 +121,20 @@ public class GameActivity extends Activity
 			}
 		});
         
-        final MyButtonFont takeMoneyButton = (MyButtonFont) findViewById(R.id.takeMoneyButton);
-        takeMoneyButton.setOnClickListener(new View.OnClickListener() 
-        {
-            @Override
-            public void onClick(View view) 
-            {
-        		Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
-				    public void run() {
-				    	showTakeMoneyDialog();
-				    }}, 3000);      
-            }
-        });
+        // A am so sorry...        
+//        final MyButtonFont takeMoneyButton = (MyButtonFont) findViewById(R.id.takeMoneyButton);
+//        takeMoneyButton.setOnClickListener(new View.OnClickListener() 
+//        {
+//            @Override
+//            public void onClick(View view) 
+//            {
+//        		Handler handler = new Handler();
+//				handler.postDelayed(new Runnable() {
+//				    public void run() {
+//				    	showTakeMoneyDialog();
+//				    }}, 3000);      
+//            }
+//        });
         
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
@@ -210,10 +211,10 @@ public class GameActivity extends Activity
     	Dialog.show();
     }
     
-    public void showTakeMoneyDialog(){
-    	Dialog Dialog = onCreateDialog(3);
-    	Dialog.show();
-    }
+//    public void showTakeMoneyDialog(){
+//    	Dialog Dialog = onCreateDialog(3);
+//    	Dialog.show();
+//    }
       
 
 }
