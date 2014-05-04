@@ -25,7 +25,7 @@ public class ChooseTopicActivity extends Activity
 		
 		TextView chooseTopicTextView = (TextView) findViewById(R.id.chooseTopicTextView);
 		
-		ListView topicslistView = (ListView) findViewById(R.id.topicslistView);
+		/*ListView topicslistView = (ListView) findViewById(R.id.topicslistView);
 		//topicslistView.setTextFilterEnabled(true);
 
 		String[] topics = {"Geschichte", "Kunst", "Sport"};
@@ -41,7 +41,7 @@ public class ChooseTopicActivity extends Activity
 				// TODO: start GameActivity
 			}
 			
-		});
+		});*/
 	}
 	
 }

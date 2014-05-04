@@ -144,6 +144,8 @@
             android:layout_alignRight="@+id/variant_a"
             android:layout_alignTop="@+id/variant_a"
             android:text="%1"
+            android:background="#80ffffff"
+            android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <ibiapi.fontpackage.MyTextViewFont
 	    	style="@style/button"
@@ -154,6 +156,8 @@
             android:layout_alignRight="@+id/variant_b"
             android:layout_alignTop="@+id/variant_b"
             android:text="%2"
+            android:background="#80ffffff"
+            android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <ibiapi.fontpackage.MyTextViewFont
 	    	style="@style/button"
@@ -164,15 +168,19 @@
             android:layout_alignRight="@+id/variant_c"
             android:layout_alignTop="@+id/variant_c"
             android:text="%3"
+            android:background="#80ffffff"
+            android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
         <ibiapi.fontpackage.MyTextViewFont
 	    	style="@style/button"
             android:id="@+id/percentageTextViewD"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_alignRight="@+id/variant_d"
             android:layout_alignTop="@+id/variant_d"
             android:text="%4"
+            android:background="#80ffffff"
+            android:textSize="20sp" 
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </RelativeLayout>

@@ -15,18 +15,58 @@
         android:clickable="false" />
      
      
-    <TextView
-        android:id="@+id/chooseTopicTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-	    android:layout_below="@+id/logo_view"
-        android:layout_marginTop="30dp"
-        android:text="Choose a topic"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#fff"/>
+     <TextView
+	        android:id="@+id/chooseTopicTextView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="60dp"
+	        android:text="Choose a topic"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:layout_centerHorizontal="true"
+	 	    android:layout_below="@+id/logo_view"
+	        android:textColor="#fff"/>
+     
+     
+     <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_below="@+id/chooseTopicTextView"
+	    android:orientation="horizontal" >
+	     
+	     <Button
+	         android:id="@+id/leftArrow"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginLeft="10dp"
+	         android:layout_marginTop="30dp"
+	         android:layout_weight="1"
+	         android:background="@drawable/arrow_left" />
+	     
+	    <ibiapi.fontpackage.MyTextViewFont
+	        android:id="@+id/topicTextView"
+	        style="@style/button"
+	        android:layout_width="200dp"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="30dp"
+	        android:background="@drawable/white_container"
+	        android:gravity="center"
+	        android:text="Geography"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="#000"
+	        android:textSize="25sp" />
+	    
+	    <Button
+	        android:id="@+id/rightArrow"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginRight="10dp"
+	        android:layout_marginTop="30dp"
+	        android:layout_weight="1"
+	        android:background="@drawable/arrow_right" />
     
-    <ListView
+    </LinearLayout>
+    
+    <!-- <ListView
         android:id="@+id/topicslistView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +74,7 @@
         android:layout_centerHorizontal="true"
         
         android:layout_marginTop="50dp" >
-    </ListView>
+    </ListView>  -->
 
 
 </RelativeLayout>
