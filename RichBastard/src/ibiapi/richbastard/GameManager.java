@@ -1,11 +1,12 @@
 package ibiapi.richbastard;
 
+import ibiapi.fontpackage.MyTextViewFont;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 import db.Question;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -26,13 +27,13 @@ public class GameManager
     
     private GameActivity mActivity;
     
-    private TextView mQuestionView;
+    private MyTextViewFont mQuestionView;
     private TestQuestion mQuestion;
     
-	private TextView[] mAnswerViews;
+	private MyTextViewFont[] mAnswerViews;
     //private String[] mAnswerOptions;
     
-    private TextView[] mPercentageViews;
+    private MyTextViewFont[] mPercentageViews;
     
     private int mQuestionNumber = 0;
     private int mCorrectId;
@@ -103,12 +104,12 @@ public class GameManager
 	
 	public void initViewReferences()
 	{
-    	mAnswerViews = new TextView[4];
-    	mAnswerViews[0] = (TextView) mActivity.findViewById(R.id.variant_a);
-    	mAnswerViews[1] = (TextView) mActivity.findViewById(R.id.variant_b);
-    	mAnswerViews[2] = (TextView) mActivity.findViewById(R.id.variant_c);
-    	mAnswerViews[3] = (TextView) mActivity.findViewById(R.id.variant_d);
-    	mQuestionView = (TextView) mActivity.findViewById(R.id.question_field);
+    	mAnswerViews = new MyTextViewFont[4];
+    	mAnswerViews[0] = (MyTextViewFont) mActivity.findViewById(R.id.variant_a);
+    	mAnswerViews[1] = (MyTextViewFont) mActivity.findViewById(R.id.variant_b);
+    	mAnswerViews[2] = (MyTextViewFont) mActivity.findViewById(R.id.variant_c);
+    	mAnswerViews[3] = (MyTextViewFont) mActivity.findViewById(R.id.variant_d);
+    	mQuestionView = (MyTextViewFont) mActivity.findViewById(R.id.question_field);
 	}
 	
 	public void chooseAnswer(final int answer)
@@ -231,12 +232,12 @@ public class GameManager
 	
 	private void displayVotingResults()
 	{
-    	mPercentageViews = new TextView[4];
+    	mPercentageViews = new MyTextViewFont[4];
     	int[] ids = {R.id.percentageTextViewA, R.id.percentageTextViewB,
     			R.id.percentageTextViewC, R.id.percentageTextViewD};
     	for (int i = 0; i < 4; ++i)
     	{
-    		mPercentageViews[i] = (TextView) mActivity.findViewById(ids[i]);
+    		mPercentageViews[i] = (MyTextViewFont) mActivity.findViewById(ids[i]);
     		if (!isAnswerCleared(i))
     			mPercentageViews[i].setVisibility(View.VISIBLE);
     	}

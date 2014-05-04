@@ -1,6 +1,7 @@
 package ibiapi.richbastard;
 
 import ibiapi.fontpackage.MyButtonFont;
+import ibiapi.fontpackage.MyTextViewFont;
 import ibiapi.richbastard.AudioPlayer.Theme;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -137,7 +138,7 @@ public class GameActivity extends Activity
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
         {
-        	TextView answerView = (TextView) findViewById(ids[i]);
+        	MyTextViewFont answerView = (MyTextViewFont) findViewById(ids[i]);
         	final int id = i;
         	answerView.setOnClickListener(new View.OnClickListener() 
         	{		

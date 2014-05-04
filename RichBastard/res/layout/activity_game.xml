@@ -54,7 +54,8 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp" >
 
-        <TextView
+        <ibiapi.fontpackage.MyTextViewFont
+	    	style="@style/button"          
             android:id="@+id/question_field"
             android:layout_width="300dp"
             android:layout_height="60dp"
@@ -72,7 +73,8 @@
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
-        <TextView
+       <ibiapi.fontpackage.MyTextViewFont
+	    	style="@style/button"
             android:id="@+id/variant_a"
             android:layout_width="fill_parent"
             android:layout_height="35dp"
@@ -83,11 +85,12 @@
             android:layout_below="@+id/question_field"
             android:layout_marginTop="15dp"
             android:background="@drawable/answer_option"
-            android:gravity="top"
+            android:gravity="left|center_vertical"
             android:textAlignment="gravity"
             android:textSize="12sp" />
 
-        <TextView
+        <ibiapi.fontpackage.MyTextViewFont
+	    	style="@style/button"
             android:id="@+id/variant_c"
             android:layout_width="140dp"
             android:layout_height="35dp"
@@ -98,11 +101,12 @@
             android:layout_below="@+id/variant_b"
             android:layout_marginTop="14dp"
             android:background="@drawable/answer_option"
-            android:gravity="top"
+            android:gravity="left|center_vertical"
             android:paddingLeft="0dp"
             android:textSize="12sp" />
 
-        <TextView
+        <ibiapi.fontpackage.MyTextViewFont
+	    	style="@style/button"
             android:id="@+id/variant_b"
             android:layout_width="140dp"
             android:layout_height="35dp"
@@ -113,9 +117,11 @@
             android:layout_below="@+id/variant_a"
             android:layout_marginTop="16dp"
             android:background="@drawable/answer_option"
+            android:gravity="left|center_vertical"
             android:textSize="12sp" />
 
-        <TextView
+        <ibiapi.fontpackage.MyTextViewFont
+	    	style="@style/button"
             android:id="@+id/variant_d"
             android:layout_width="140dp"
             android:layout_height="35dp"
