@@ -22,8 +22,15 @@ public class GameManager
 	private static AudioPlayer mAudioPlayer;
 	private static QuestionsManager mQuestionsManager;
 	
+    private final long[] pauseBeforeQuestion = 
+    	{0,5000,0,0,0,0,
+    	5000,5000,5000,5000,5000,
+    	5000,5000,5000,5000,5000};
+    private final long[] pauseAfterQuestion = 
+    	{0,2000, 2000, 2000, 2000, 8500,
+    	7000, 7000, 7000, 7000, 9500,
+    	7000, 7000, 7000, 7000, 10000};
     private final long PAUSE_AMOUNT = 5000;
-    private final long PAUSE_BETWEEN_QUESTIONS = 7000;
     
     private GameActivity mActivity;
     
@@ -78,7 +85,7 @@ public class GameManager
 		        showQuestion();
 		        mAudioPlayer.playQuestion(mQuestionNumber);	
 			}
-		}, PAUSE_AMOUNT);
+		}, pauseBeforeQuestion[mQuestionNumber]);
 	}
 	
 	private void showQuestion()
@@ -147,7 +154,7 @@ public class GameManager
 								
 							}
 						}
-					}, PAUSE_BETWEEN_QUESTIONS);
+					}, pauseAfterQuestion[mQuestionNumber]);
 				}
 				else
 				{
@@ -359,7 +366,7 @@ public class GameManager
 	{
     	// without a certain topic yet
     	loadQuestions(null);
-		mQuestionNumber = 6;
+		mQuestionNumber = 1;
 		playCurrentQuestion();
 	}
 	
