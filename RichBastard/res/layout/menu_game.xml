@@ -32,7 +32,8 @@
         android:layout_height="wrap_content"
     -->
 
-	<Button
+	<ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
 	    android:id="@+id/menuStartBtn"
 	    android:layout_width="220dp"
 	    android:layout_height="50dp"
@@ -44,7 +45,8 @@
 	    android:textColor="#000"
 	    android:textSize="25sp" />
 
-    <Button
+    <ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
         android:id="@+id/menuSettingsBtn"
         android:layout_width="220dp"
         android:layout_height="50dp"
@@ -56,7 +58,8 @@
         android:textColor="#000"
         android:textSize="25sp" />
 
-    <Button
+    <ibiapi.fontpackage.MyButtonFont
+        style="@style/button"
         android:id="@+id/menuHelpBtn"
         android:layout_width="220dp"
         android:layout_height="50dp"
@@ -71,7 +74,8 @@
           
     
 
-    <Button
+     <ibiapi.fontpackage.MyButtonFont
+        style="@style/button"
         android:id="@+id/menuExitBtn"
         android:layout_width="220dp"
         android:layout_height="50dp"

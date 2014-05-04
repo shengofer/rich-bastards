@@ -1,5 +1,7 @@
 package ibiapi.richbastard;
 
+import ibiapi.fontpackage.MyButtonFont;
+import ibiapi.fontpackage.MyTextViewFont;
 import ibiapi.richbastard.AudioPlayer.Theme;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -84,7 +86,7 @@ public class GameActivity extends Activity
 
 	private void initButtons()
 	{
-        final Button fiftyFiftyButton = (Button) findViewById(R.id.fiftyFiftyButton);
+        final MyButtonFont fiftyFiftyButton = (MyButtonFont) findViewById(R.id.fiftyFiftyButton);
         fiftyFiftyButton.setOnClickListener(new View.OnClickListener() 
         {
             @Override
@@ -95,7 +97,7 @@ public class GameActivity extends Activity
             }
         });
         
-        final Button changeQuestionButton = (Button) findViewById(R.id.changeQuestionButton);
+        final MyButtonFont changeQuestionButton = (MyButtonFont) findViewById(R.id.changeQuestionButton);
         changeQuestionButton.setOnClickListener(new View.OnClickListener()
         {
 			@Override
@@ -106,7 +108,7 @@ public class GameActivity extends Activity
 			}
 		});
         
-        final Button askForAudienceButton = (Button) findViewById(R.id.askForAudienceButton);
+        final MyButtonFont askForAudienceButton = (MyButtonFont) findViewById(R.id.askForAudienceButton);
         askForAudienceButton.setOnClickListener(new View.OnClickListener()
         {
 			@Override
@@ -119,7 +121,7 @@ public class GameActivity extends Activity
 			}
 		});
         
-        final Button takeMoneyButton = (Button) findViewById(R.id.takeMoneyButton);
+        final MyButtonFont takeMoneyButton = (MyButtonFont) findViewById(R.id.takeMoneyButton);
         takeMoneyButton.setOnClickListener(new View.OnClickListener() 
         {
             @Override
@@ -136,7 +138,7 @@ public class GameActivity extends Activity
         int[] ids = {R.id.variant_a, R.id.variant_b, R.id.variant_c, R.id.variant_d};
         for (int i = 0; i < 4; i++)
         {
-        	TextView answerView = (TextView) findViewById(ids[i]);
+        	MyTextViewFont answerView = (MyTextViewFont) findViewById(ids[i]);
         	final int id = i;
         	answerView.setOnClickListener(new View.OnClickListener() 
         	{		

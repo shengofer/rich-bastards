@@ -16,6 +16,7 @@
     <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
+<<<<<<< HEAD
 	<!-- My android theme. -->
        <style name="SettingsTheme" parent="@android:style/Theme.NoTitleBar"> 
                <item name="android:background">#4385f5</item>
@@ -23,4 +24,14 @@
        <style name="HelpTheme" parent="@android:style/Theme.NoTitleBar"> 
                <item name="android:background">#4385f5</item>
        </style> 
+=======
+	<!-- My androoid theme. -->
+    <style name="SettingsTheme" parent="@android:style/Theme.NoTitleBar"> 
+               <item name="android:background">#4385f5</item>
+    </style> 
+      <!-- Text font. -->  
+     <style name="button" parent="@android:style/Widget.Button">
+    <item name="font">lvnm.ttf</item>
+</style>
+>>>>>>> 5807bdd85702f952dbaaf49fe88c76acd5ce19a6
 </resources>

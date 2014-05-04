@@ -1,5 +1,6 @@
 package ibiapi.richbastard;
 
+import ibiapi.fontpackage.MyButtonFont;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -34,18 +35,18 @@ public class MenuActivity extends Activity implements OnClickListener {
         //setContentView(new GameView(this,null));
         
         /*BEGIN Click Button Listener*/
-        Button startButton = (Button)findViewById(R.id.menuStartBtn);
+        MyButtonFont startButton = (MyButtonFont)findViewById(R.id.menuStartBtn);
         startButton.setOnClickListener(this);
         
         //settings
-        Button settingsButton = (Button)findViewById(R.id.menuSettingsBtn);
+        MyButtonFont settingsButton = (MyButtonFont)findViewById(R.id.menuSettingsBtn);
         settingsButton.setOnClickListener(this);
         
-        Button exitButton = (Button)findViewById(R.id.menuExitBtn);
+        MyButtonFont exitButton = (MyButtonFont)findViewById(R.id.menuExitBtn);
         exitButton.setOnClickListener(this);
         
         //Help
-        Button helpButton = (Button)findViewById(R.id.menuHelpBtn);
+        MyButtonFont helpButton = (MyButtonFont)findViewById(R.id.menuHelpBtn);
         helpButton.setOnClickListener(this);
         
         /*END Click Button Listener*/
