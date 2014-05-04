@@ -1,5 +1,6 @@
 package ibiapi.richbastard;
 
+import ibiapi.fontpackage.MyButtonFont;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ public class ChooseGameModeActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choose_game_mode);
 
-		Button classicGameButton = (Button) findViewById(R.id.classicGameButton);
+		MyButtonFont classicGameButton = (MyButtonFont) findViewById(R.id.classicGameButton);
 		classicGameButton.setOnClickListener(new OnClickListener()
 		{
 			@Override
@@ -26,7 +27,7 @@ public class ChooseGameModeActivity extends Activity
 			}
 		});
 		
-		Button thematicalGameButton = (Button) findViewById(R.id.thematicalGameButton);
+		MyButtonFont thematicalGameButton = (MyButtonFont) findViewById(R.id.thematicalGameButton);
 		thematicalGameButton.setOnClickListener(new OnClickListener()
 		{
 			@Override
@@ -37,7 +38,7 @@ public class ChooseGameModeActivity extends Activity
 			}
 		});
 		
-		Button blitzGameButton = (Button) findViewById(R.id.blitzGameButton);
+		MyButtonFont blitzGameButton = (MyButtonFont) findViewById(R.id.blitzGameButton);
 		blitzGameButton.setOnClickListener(new OnClickListener()
 		{
 			@Override

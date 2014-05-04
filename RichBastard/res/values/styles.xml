@@ -17,7 +17,11 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 	<!-- My androoid theme. -->
-       <style name="SettingsTheme" parent="@android:style/Theme.NoTitleBar"> 
+    <style name="SettingsTheme" parent="@android:style/Theme.NoTitleBar"> 
                <item name="android:background">#4385f5</item>
-       </style> 
+    </style> 
+      <!-- Text font. -->  
+     <style name="button" parent="@android:style/Widget.Button">
+    <item name="font">lvnm.ttf</item>
+</style>
 </resources>

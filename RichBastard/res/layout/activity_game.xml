@@ -19,7 +19,8 @@
         android:layout_centerHorizontal="true"
         android:clickable="false" />
 
-    <Button
+    <ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
         android:id="@+id/fiftyFiftyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +31,8 @@
         android:layout_marginTop="29dp"
         android:text="50:50" />
 
-    <Button
+    <ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
         android:id="@+id/changeQuestionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -165,7 +167,8 @@
 
     </RelativeLayout>
 
-    <Button
+    <ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
         android:id="@+id/askForAudienceButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -174,7 +177,8 @@
         android:layout_marginTop="14dp"
         android:text="Ask for audience" />
 
-    <Button
+    <ibiapi.fontpackage.MyButtonFont
+	    style="@style/button"
         android:id="@+id/takeMoneyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
