@@ -43,11 +43,10 @@
         </activity>
         <activity
             android:name="ibiapi.richbastard.HelpActivity"
+            android:screenOrientation="portrait" 
             android:label="@string/title_activity_help"
-            android:parentActivityName="ibiapi.richbastard.MenuActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ibiapi.richbastard.MenuActivity" />
+            android:theme="@style/HelpTheme" >
+            
         </activity>
     </application>
 

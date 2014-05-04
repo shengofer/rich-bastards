@@ -13,11 +13,14 @@
     </style>
 
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-	<!-- My androoid theme. -->
+	<!-- My android theme. -->
        <style name="SettingsTheme" parent="@android:style/Theme.NoTitleBar"> 
+               <item name="android:background">#4385f5</item>
+       </style>
+       <style name="HelpTheme" parent="@android:style/Theme.NoTitleBar"> 
                <item name="android:background">#4385f5</item>
        </style> 
 </resources>

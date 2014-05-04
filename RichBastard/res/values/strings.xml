@@ -7,7 +7,11 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_help">HelpActivity</string>
     
-    <string name="test_help">It works!</string>
+    <string name="help_text">
+        I need to google how to edit text here appropriately. \n
+        Bob\'s paragraph \n
+        Another awesome Bob\'s paragraph
+    </string>
     
     <!-- START Menu resourses -->
     
@@ -21,9 +25,9 @@
     
     <!-- START Game dialog -->
     <string name="end">End</string>
-    <string name="congratz">Congratulation.You have won.Press OK to return on main menu.</string>
-    <string name="condolence">What\'s a pity.You are loser.Press OK to return on main menu.</string>
-    <string name="takemoney">Congratulation.You take money.Press OK to return on main menu.</string>
+    <string name="congratz">Congratulations! You have won. Press OK to return to main menu.</string>
+    <string name="condolence">What a pity..You are a loser. Press OK to return to main menu.</string>
+    <string name="takemoney">Congratulations! You take the money. Press OK to return to main menu.</string>
     <string name="ok">OK</string>
     <!-- END Game dialog -->
 
