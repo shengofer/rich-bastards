@@ -193,6 +193,7 @@ public class GameActivity extends Activity
             public void onClick(DialogInterface arg0, int arg1) {
 				Intent menu = new Intent();
                 menu.setClass(GameActivity.this, MenuActivity.class);
+                menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(menu);
             }
         });
