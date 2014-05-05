@@ -1,11 +1,9 @@
 package ibiapi.richbastard;
 
 import ibiapi.fontpackage.MyTextViewFont;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Handler;
+import android.os.*;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,6 +28,7 @@ public class GameManager
     private MyTextViewFont mQuestionView;
     private TestQuestion mQuestion;
     private MyTextViewFont mQuestionPanelView;
+    private MyTextViewFont mTimerView;
     
 	private MyTextViewFont[] mAnswerViews;
     //private String[] mAnswerOptions;
@@ -46,6 +45,12 @@ public class GameManager
     private static final int numberOfQuestions = 15;
     
     private TestQuestion[] mQuestions;
+    
+    private static Timer mTimer;
+    private final int mTimeLimit = 10;
+    private int mSecondsPassed;
+    private static Handler mTimerViewHandler;
+    private static String mTimerMessage;
     
     private final int sums[] = 
     	{
@@ -72,6 +77,7 @@ public class GameManager
     		mGameManager = new GameManager();
     		mAudioPlayer = AudioPlayer.getInstance();
     		mQuestionsManager = QuestionsManager.getInstance();
+    		mTimer = new Timer();
     	}
     	return mGameManager;
     }
@@ -106,6 +112,8 @@ public class GameManager
         makeChoosable(true);
         canUseLifelines = true;
 		mQuestionPanelView.setText(String.format("Question: %d/15  Won: %d₴", mQuestionNumber, sums[mQuestionNumber-1]));
+		if (true)
+			launchTimer();
 	}
 	
 	public void setActivity(GameActivity mActivity)
@@ -122,10 +130,30 @@ public class GameManager
     	mAnswerViews[3] = (MyTextViewFont) mActivity.findViewById(R.id.variant_d);
     	mQuestionView = (MyTextViewFont) mActivity.findViewById(R.id.question_field);
     	mQuestionPanelView = (MyTextViewFont) mActivity.findViewById(R.id.moneyPanelTextView);
+    	mTimerView = (MyTextViewFont) mActivity.findViewById(R.id.timerView);
+    	mTimerView.setText("");
+    	mTimerViewHandler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) 
+			{
+				mTimerView.setText(mTimerMessage);
+				if (mSecondsPassed == mTimeLimit)
+				{
+					purgeTimer();
+					makeChoosable(false);
+					canUseLifelines = false;
+					hideVotingResults(false);
+					revealCorrectAnswer();
+					giveCondolences();
+				}
+			}
+		};
 	}
 	
 	public void chooseAnswer(final int answer)
 	{
+		if (true)
+			stopTimer();
 		makeChoosable(false);
 		canUseLifelines = false;
 		hideVotingResults(false);
@@ -163,13 +191,7 @@ public class GameManager
 				}
 				else
 				{
-					// present our condolences to the user
-					Handler handler = new Handler();
-					handler.postDelayed(new Runnable() {
-					    public void run() {
-					    	mActivity.showCondDialog(sums[mQuestionNumber-1]);
-					    }}, 3000);
-					
+					giveCondolences();
 				}
 			}		
 		}, PAUSE_AMOUNT);
@@ -332,6 +354,22 @@ public class GameManager
 		}
 	}
 	
+	private void revealCorrectAnswer()
+	{
+		stupidAnimationWrong(mCorrectId);
+		mAudioPlayer.playWrong(mQuestionNumber);
+	}
+	
+	private void giveCondolences()
+	{
+		// present our condolences to the user
+		Handler handler = new Handler();
+		handler.postDelayed(new Runnable() {
+		    public void run() {
+		    	mActivity.showCondDialog(sums[mQuestionNumber-1]);
+		    }}, 3000);
+	}
+	
 	private void stupidAnimationCorrect(int answer)
 	{
 		mAnswerViews[answer].setBackgroundResource(R.drawable.correct_answer_transition);
@@ -381,4 +419,30 @@ public class GameManager
 		return numberOfQuestions;
 	}
 
+	private void launchTimer()
+	{
+		mSecondsPassed = -1;
+		mTimer = new Timer();
+		mTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				++mSecondsPassed;
+				mTimerMessage = String.format("Seconds left: %d", mTimeLimit - mSecondsPassed);
+				mTimerViewHandler.sendEmptyMessage(0);
+			}
+		}, 0, 1000);
+	}
+	
+	private void stopTimer()
+	{
+		purgeTimer();
+		mTimerView.setText("");
+	}
+	
+	private void purgeTimer()
+	{
+		mTimer.cancel();
+		mTimer.purge();
+	}
 }
