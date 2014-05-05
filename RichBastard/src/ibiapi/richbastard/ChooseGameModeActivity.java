@@ -44,7 +44,9 @@ public class ChooseGameModeActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				// TODO: start Blitz Activity
+				Intent intent = new Intent(ChooseGameModeActivity.this,GameActivity.class);
+				intent.putExtra("Blitz", true);
+				startActivity(intent);
 			}
 		});
 	}

@@ -37,6 +37,15 @@
        android:background="@drawable/head"
        android:gravity="bottom|right"
        android:orientation="vertical" >
+       
+       <ibiapi.fontpackage.MyTextViewFont
+        android:id="@+id/timerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="14dp"
+        android:text="TextView"
+        android:textColor="#d10000" />
 
        <ibiapi.fontpackage.MyTextViewFont
            android:id="@+id/moneyPanelTextView"
@@ -246,14 +255,6 @@
 
     </RelativeLayout>
 
-    <ibiapi.fontpackage.MyTextViewFont
-        android:id="@+id/timerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/question_layout"
-        android:layout_below="@+id/panelLayout"
-        android:layout_marginTop="14dp"
-        android:text="TextView"
-        android:textColor="@android:color/white" />
+    
 
 </RelativeLayout>

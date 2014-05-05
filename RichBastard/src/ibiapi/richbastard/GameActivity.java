@@ -27,11 +27,15 @@ public class GameActivity extends Activity
         initAudioPlayer();
 
         String topic = null;
-        Bundle topicBundle = getIntent().getExtras();
-        if (topicBundle != null)
-        	topic = topicBundle.getString("topic");
+        boolean blitz = false;
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        {
+        	topic = bundle.getString("topic");
+        	blitz = bundle.getBoolean("Blitz");
+        }
         
-        initGameManager();
+        initGameManager(blitz);
         initButtons();
         
         mGameManager.startGame(topic);
@@ -67,9 +71,9 @@ public class GameActivity extends Activity
         return prefEffect;
     }
 
-    private void initGameManager()
+    private void initGameManager(boolean blitz)
     {
-        mGameManager = GameManager.getInstance();
+        mGameManager = GameManager.getInstance(blitz);
     	mGameManager.setActivity(this);
     	mGameManager.initViewReferences();
     }
@@ -222,4 +226,10 @@ public class GameActivity extends Activity
 //    }
       
 
+    public void onBackPressed()
+    {
+    	super.onBackPressed();
+        mGameManager.onStopGame();
+    }
+    
 }

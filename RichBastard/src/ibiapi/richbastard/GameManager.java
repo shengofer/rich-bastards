@@ -5,6 +5,7 @@ import java.util.*;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.*;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class GameManager 
@@ -60,6 +61,10 @@ public class GameManager
     		64000, 125000, 250000, 500000, 1000000
     	};
     
+    private boolean mBlitz = false;
+    
+    private LinearLayout mPanelLayout;
+    
     private void loadQuestions(String topic)
     {
     	mQuestions = mQuestionsManager.retrieveQuestions(topic);
@@ -70,7 +75,7 @@ public class GameManager
     {
     }
     
-    public static GameManager getInstance()
+    public static GameManager getInstance(boolean blitz)
     {
     	if (mGameManager == null)
     	{
@@ -79,6 +84,7 @@ public class GameManager
     		mQuestionsManager = QuestionsManager.getInstance();
     		mTimer = new Timer();
     	}
+    	mGameManager.mBlitz = blitz;
     	return mGameManager;
     }
 
@@ -112,7 +118,7 @@ public class GameManager
         makeChoosable(true);
         canUseLifelines = true;
 		mQuestionPanelView.setText(String.format("Question: %d/15  Won: %d₴", mQuestionNumber, sums[mQuestionNumber-1]));
-		if (true)
+		if (mBlitz)
 			launchTimer();
 	}
 	
@@ -129,30 +135,39 @@ public class GameManager
     	mAnswerViews[2] = (MyTextViewFont) mActivity.findViewById(R.id.variant_c);
     	mAnswerViews[3] = (MyTextViewFont) mActivity.findViewById(R.id.variant_d);
     	mQuestionView = (MyTextViewFont) mActivity.findViewById(R.id.question_field);
+    	mPanelLayout = (LinearLayout) mActivity.findViewById(R.id.panelLayout);
     	mQuestionPanelView = (MyTextViewFont) mActivity.findViewById(R.id.moneyPanelTextView);
     	mTimerView = (MyTextViewFont) mActivity.findViewById(R.id.timerView);
-    	mTimerView.setText("");
-    	mTimerViewHandler = new Handler() {
-			@Override
-			public void handleMessage(Message msg) 
-			{
-				mTimerView.setText(mTimerMessage);
-				if (mSecondsPassed == mTimeLimit)
+    	if (mBlitz)
+    	{
+    		mPanelLayout.setBackgroundResource(R.drawable.head_timer);
+	    	mTimerViewHandler = new Handler() {
+				@Override
+				public void handleMessage(Message msg) 
 				{
-					purgeTimer();
-					makeChoosable(false);
-					canUseLifelines = false;
-					hideVotingResults(false);
-					revealCorrectAnswer();
-					giveCondolences();
+					mTimerView.setText(mTimerMessage);
+					if (mSecondsPassed == mTimeLimit)
+					{
+						purgeTimer();
+						makeChoosable(false);
+						canUseLifelines = false;
+						hideVotingResults(false);
+						revealCorrectAnswer();
+						giveCondolences();
+					}
 				}
-			}
-		};
+			};
+    	}
+    	else
+    	{
+    		mPanelLayout.setBackgroundResource(R.drawable.head);
+    	}
+    	mTimerView.setText("");
 	}
 	
 	public void chooseAnswer(final int answer)
 	{
-		if (true)
+		if (mBlitz)
 			stopTimer();
 		makeChoosable(false);
 		canUseLifelines = false;
@@ -428,7 +443,7 @@ public class GameManager
 			public void run() {
 				// TODO Auto-generated method stub
 				++mSecondsPassed;
-				mTimerMessage = String.format("Seconds left: %d", mTimeLimit - mSecondsPassed);
+				mTimerMessage = String.format("Time: %d", mTimeLimit - mSecondsPassed);
 				mTimerViewHandler.sendEmptyMessage(0);
 			}
 		}, 0, 1000);
@@ -445,4 +460,11 @@ public class GameManager
 		mTimer.cancel();
 		mTimer.purge();
 	}
+	
+	public void onStopGame()
+	{
+		if (mBlitz)
+			stopTimer();
+	}
+	
 }
