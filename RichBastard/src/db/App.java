@@ -6,7 +6,7 @@ import android.content.Context;
 public class App extends Application {
 
 private static Context mContext;
-public static DataBaseHelper db;
+public static BaseHelper db;
 
 //	@Override
 //	public void onCreate() {
@@ -18,7 +18,7 @@ public static DataBaseHelper db;
 	 @Override
 	  public void onCreate() {
 	    super.onCreate();
-	    db = new DataBaseHelper(getApplicationContext());
+	    db = new BaseHelper(getApplicationContext());
 	    db.openDataBase();
 
 	  }

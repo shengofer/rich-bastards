@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,13 +17,13 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
 @SuppressLint("SdCardPath")
-public class DataBaseHelper extends SQLiteOpenHelper{
+public class BaseHelper extends SQLiteOpenHelper{
 	private static String DB_PATH = "/data/data/assets/databases/"; 
     private static String DB_NAME = "RichBastard";     
     private SQLiteDatabase myDataBase;    
     private final Context myContext;
 
-    public DataBaseHelper(Context context) {
+    public BaseHelper(Context context) {
     	super(context, DB_NAME, null, 1);
     	this.myContext = context;
     }	

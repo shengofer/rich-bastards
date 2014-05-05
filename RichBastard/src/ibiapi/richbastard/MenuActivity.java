@@ -1,19 +1,27 @@
 package ibiapi.richbastard;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import db.DatabaseHelper;
 import ibiapi.fontpackage.MyButtonFont;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 
 	
@@ -23,6 +31,10 @@ public class MenuActivity extends Activity implements OnClickListener {
 	SharedPreferences sharedpreferences;
 	public  boolean ENABLE_MUSIC = true; 
 	public  boolean ENABLE_EFFECT = true;
+	
+	private SQLiteDatabase mDB = null;
+	private DatabaseHelper mDbHelper;
+	private final String fileName = "RichBastard";
  
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +77,49 @@ public class MenuActivity extends Activity implements OnClickListener {
         Message msg = new Message();
         msg.what = STOPSPLASH;
         splashHandler.sendMessageDelayed(msg, SPLASHTIME);
+        
+        
+        AssetManager assetManager = getResources().getAssets();
+        InputStream inputStream = null;
+        mDbHelper = new DatabaseHelper(this);
+     // Get the underlying database for writing
+        mDB = mDbHelper.getWritableDatabase();
+        
+
+//      clearAll();
+        
+        Log.d("ATTENTION ", "BEFORE TRY body");
+        
+ //       ContentValues values = new ContentValues();
+        try {
+        		inputStream = assetManager.open(fileName);
+        		if (inputStream != null){
+        			BufferedReader br = new BufferedReader( new InputStreamReader(inputStream));
+        			String line = "";
+        			try{
+        				while((line=br.readLine())!= null){
+        					Log.d("ASSETS ",line);
+        					mDB.execSQL(line);
+        			
+        					if(line == "")
+        						break;
+        				}
+        			}
+        			catch (IOException e) {
+        				e.printStackTrace();
+        			}
+        		}
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+        
+        
+    }
+    
+    
+    public void clearAll(){
+    	mDB.delete(DatabaseHelper.TABLE_ANSWER, null, null);
+    	mDB.delete(DatabaseHelper.TABLE_QUESTION, null, null);
     }
 
     /** Button handling */

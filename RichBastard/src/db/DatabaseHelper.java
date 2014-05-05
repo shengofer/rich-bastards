@@ -7,9 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 //it is useless now because I want to try to work with sql file
 //but in case everything is bad I will use this, so please, do not delete it
-public class DatabaseHelpe extends SQLiteOpenHelper{
+public class DatabaseHelper extends SQLiteOpenHelper{
 
-	private static int DB_VERSION = 1;
+	private static int DB_VERSION = 2;
 	private static String DB_NAME = "RichBastard";
 	
 	//tables' variables descriptions
@@ -33,7 +33,7 @@ public class DatabaseHelpe extends SQLiteOpenHelper{
 	  }
 	
 	
-	public DatabaseHelpe(Context context){
+	public DatabaseHelper(Context context){
 		super(context, DB_NAME, null, (DB_VERSION+1));
 	}
 	
@@ -41,13 +41,13 @@ public class DatabaseHelpe extends SQLiteOpenHelper{
 	@Override
 	public void onCreate(SQLiteDatabase sqLiteDatabase) {
 		String CREATE_TABLE_QUESTION = "CREATE TABLE "+ TABLE_QUESTION +"("+
-				COLUMN_ID + " INTEGER PRIMARY KEY autoincrement," +
+				COLUMN_ID + " INTEGER, " +
 				COLUMN_TEXT + " TEXT," +
 				COLUMN_DIFFICULTY + " INTEGER, "+
 				COLUMN_TOPIC + " TEXT);";
 		
 		String CREATE_TABLE_ANSWER = "CREATE TABLE "+ TABLE_ANSWER + "("+
-				COLUMN_ID_ANSWER + " INTEGER PRIMARY KEY autoincrement,"+
+				COLUMN_ID_ANSWER + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
 				COLUMN_ID_QUESTION_FK + " INTEGER,"+
 				COLUMN_TEXT_ANSWER + " TEXT" +
 				COLUMN_CORRECT + " INTEGER);";
