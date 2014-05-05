@@ -8,8 +8,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.*;
 import android.widget.Button;
 import android.widget.TextView;
@@ -48,9 +50,21 @@ public class GameActivity extends Activity
     {
         mAudioPlayer = AudioPlayer.getInstance();
         mAudioPlayer.setContext(getApplicationContext());    
-        mAudioPlayer.setMusicEnabled(true);
-        mAudioPlayer.setEffectsEnabled(true);
+        mAudioPlayer.setMusicEnabled(getMusicPref());
+        mAudioPlayer.setEffectsEnabled(getEffectPref());
         mAudioPlayer.setTheme(Theme.Classic);
+    }
+    
+    private boolean getMusicPref(){
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); 
+        boolean prefMusic = sharedPrefs.getBoolean("prefEnableMusic", true);
+        return prefMusic;
+    }
+    
+    private boolean getEffectPref(){
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this); 
+        boolean prefEffect = sharedPrefs.getBoolean("prefEnableEffect", true);
+        return prefEffect;
     }
 
     private void initGameManager()
