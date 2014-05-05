@@ -38,17 +38,16 @@
        android:gravity="bottom|right"
        android:orientation="vertical" >
 
-       <ibiapi.fontpackage.MyButtonFont
-               style="@style/button"
+       <ibiapi.fontpackage.MyTextViewFont
            android:id="@+id/moneyPanelTextView"
-           android:layout_width="170dp"
+           style="@style/button"
+           android:layout_width="259dp"
            android:layout_height="35dp"
            android:layout_marginBottom="0dp"
            android:layout_marginRight="25dp"
            android:layout_marginTop="30dp"
-           android:text="You've stolen 1000000$"
-           android:textColor="#145c1e"
-           android:background="@drawable/money_panel" />
+           android:background="@drawable/money_panel"
+           android:textColor="#145c1e" />
 
        <LinearLayout
            android:id="@+id/lifelinesLayout"

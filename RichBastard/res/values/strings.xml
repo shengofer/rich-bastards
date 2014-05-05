@@ -36,8 +36,8 @@
     
     <!-- START Game dialog -->
     <string name="end">End</string>
-    <string name="congratz">Congratulations! You have won. Press OK to return to main menu.</string>
-    <string name="condolence">What a pity..You are a loser. Press OK to return to main menu.</string>
+    <string name="congratz">You were AWESOME! Congratulations! Now you are officially titled Rich Bastard!</string>
+    <string name="condolence">Congratulations! You have won %d₴, you bastard! Press OK to return to main menu.</string>
     <string name="takemoney">Congratulations! You take the money. Press OK to return to main menu.</string>
     <string name="ok">OK</string>
     <!-- END Game dialog -->

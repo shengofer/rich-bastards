@@ -134,7 +134,7 @@ public class GameActivity extends Activity
 			}
 		});
         
-        // A am so sorry...        
+        // I am so sorry...        
 //        final MyButtonFont takeMoneyButton = (MyButtonFont) findViewById(R.id.takeMoneyButton);
 //        takeMoneyButton.setOnClickListener(new View.OnClickListener() 
 //        {
@@ -169,59 +169,36 @@ public class GameActivity extends Activity
         	findViewById(percIds[i]).setVisibility(View.INVISIBLE);   
     }
 	
-	protected Dialog onCreateDialog(int id) {
-		   //   if (id == DIALOG_EXIT) {
+	protected Dialog onCreateDialog(String message) 
+	{
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		switch (id) {
-			//player win
-			case 1:{
-				        
-				        adb.setTitle(R.string.end);
-				        adb.setMessage(R.string.congratz);	       
-				      //  adb.setIcon(android.R.drawable.ic_dialog_info);	        
-				     //  adb.setPositiveButton(R.string.ok, myClickListener);
-				        break;
-			}
-			//player lose
-			case 2:{
-				adb.setTitle(R.string.end);
-				adb.setMessage(R.string.condolence);
-				break;
-			}
-			// for take money
-			case 3:{
-				adb.setTitle(R.string.end);
-				adb.setMessage(R.string.takemoney);
-				break;
-			}
-			default:{
-				break;
-			}
-		}
-	        adb.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-	            @Override
-	            public void onClick(DialogInterface arg0, int arg1) {
-    				Intent menu = new Intent();
-                    menu.setClass(GameActivity.this, MenuActivity.class);
-                    startActivity(menu);
-	            }
-	        });
-		        // create dialog
-		        return adb.create();
-		 //    }
-		  //    return onCreateDialog(id);
-		    }
+		adb.setTitle(R.string.end);
+        adb.setMessage(message);
+        adb.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+				Intent menu = new Intent();
+                menu.setClass(GameActivity.this, MenuActivity.class);
+                startActivity(menu);
+            }
+        });
+        return adb.create();
+    }
 	
     public void showWinDialog() {
 		// create alert dialog
-		Dialog Dialog = onCreateDialog(1);
+        String message = getResources().getString(R.string.congratz);
+		Dialog dialog = onCreateDialog(message);
 		// show it
-		Dialog.show();
+		dialog.show();
       }
     
-    public void showCondDialog(){
-    	Dialog Dialog = onCreateDialog(2);
-    	Dialog.show();
+    public void showCondDialog(int sum){
+    	// create alert dialog
+		String message = String.format(getResources().getString(R.string.condolence), sum);
+		Dialog dialog = onCreateDialog(message);
+		// show it
+		dialog.show();
     }
     
 //    public void showTakeMoneyDialog(){

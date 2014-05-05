@@ -1,20 +1,12 @@
 package ibiapi.richbastard;
 
 import ibiapi.fontpackage.MyTextViewFont;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import db.Question;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class GameManager 
@@ -37,6 +29,7 @@ public class GameManager
     
     private MyTextViewFont mQuestionView;
     private TestQuestion mQuestion;
+    private MyTextViewFont mQuestionPanelView;
     
 	private MyTextViewFont[] mAnswerViews;
     //private String[] mAnswerOptions;
@@ -54,10 +47,18 @@ public class GameManager
     
     private TestQuestion[] mQuestions;
     
+    private final int sums[] = 
+    	{
+    		0,
+    		100, 200, 300, 500, 1000,
+    		2000, 4000, 8000, 16000, 32000,
+    		64000, 125000, 250000, 500000, 1000000
+    	};
+    
     private void loadQuestions(String topic)
     {
     	mQuestions = mQuestionsManager.retrieveQuestions(topic);
-    	Toast.makeText(mActivity, topic, Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(mActivity, topic, Toast.LENGTH_SHORT).show();
     }
     
     private GameManager()
@@ -104,6 +105,7 @@ public class GameManager
 		}
         makeChoosable(true);
         canUseLifelines = true;
+		mQuestionPanelView.setText(String.format("Question: %d/15  Won: %d₴", mQuestionNumber, sums[mQuestionNumber-1]));
 	}
 	
 	public void setActivity(GameActivity mActivity)
@@ -119,6 +121,7 @@ public class GameManager
     	mAnswerViews[2] = (MyTextViewFont) mActivity.findViewById(R.id.variant_c);
     	mAnswerViews[3] = (MyTextViewFont) mActivity.findViewById(R.id.variant_d);
     	mQuestionView = (MyTextViewFont) mActivity.findViewById(R.id.question_field);
+    	mQuestionPanelView = (MyTextViewFont) mActivity.findViewById(R.id.moneyPanelTextView);
 	}
 	
 	public void chooseAnswer(final int answer)
@@ -164,7 +167,7 @@ public class GameManager
 					Handler handler = new Handler();
 					handler.postDelayed(new Runnable() {
 					    public void run() {
-					    	mActivity.showCondDialog();
+					    	mActivity.showCondDialog(sums[mQuestionNumber-1]);
 					    }}, 3000);
 					
 				}
@@ -318,6 +321,7 @@ public class GameManager
 		{
 			stupidAnimationCorrect(mCorrectId);
 			mAudioPlayer.playCorrect(mQuestionNumber);
+			mQuestionPanelView.setText(String.format("Question: %d/15  Won: %d₴", mQuestionNumber, sums[mQuestionNumber]));
 			return true;
 		}
 		else
