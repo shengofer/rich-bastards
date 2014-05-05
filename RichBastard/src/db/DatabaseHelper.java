@@ -9,8 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 //but in case everything is bad I will use this, so please, do not delete it
 public class DatabaseHelper extends SQLiteOpenHelper{
 
-	private static int DB_VERSION = 2;
-	private static String DB_NAME = "RichBastard";
+	private static int DB_VERSION = 1;
+	private static String DB_NAME = "RichB2";
 	
 	//tables' variables descriptions
 	public static final String TABLE_QUESTION = "Question";
@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
 	@Override
 	public void onCreate(SQLiteDatabase sqLiteDatabase) {
-		String CREATE_TABLE_QUESTION = "CREATE TABLE "+ TABLE_QUESTION +"("+
+/*		String CREATE_TABLE_QUESTION = "CREATE TABLE "+ TABLE_QUESTION +"("+
 				COLUMN_ID + " INTEGER, " +
 				COLUMN_TEXT + " TEXT," +
 				COLUMN_DIFFICULTY + " INTEGER, "+
@@ -53,7 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 				COLUMN_CORRECT + " INTEGER);";
 		
 		sqLiteDatabase.execSQL(CREATE_TABLE_QUESTION);
-		sqLiteDatabase.execSQL(CREATE_TABLE_ANSWER);
+		sqLiteDatabase.execSQL(CREATE_TABLE_ANSWER);*/
 		
 		_should_fill = true;
 	}

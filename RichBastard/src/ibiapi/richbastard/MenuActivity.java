@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,48 +73,62 @@ public class MenuActivity extends Activity implements OnClickListener {
          */
         setPreferences();
         
+        // splash screen
+        splash = (ImageView) findViewById(R.id.splashscreen); 
+        Message msg = new Message();
+        msg.what = STOPSPLASH;
+        splashHandler.sendMessageDelayed(msg, SPLASHTIME);
         
-//        AssetManager assetManager = getResources().getAssets();
-//        InputStream inputStream = null;
-//        mDbHelper = new DatabaseHelper(this);
-//     // Get the underlying database for writing
-//        mDB = mDbHelper.getWritableDatabase();
-//        
-//
-////      clearAll();
-//        
-//        Log.d("ATTENTION ", "BEFORE TRY body");
-//        
-// //       ContentValues values = new ContentValues();
-//        try {
-//        		inputStream = assetManager.open(fileName);
-//        		if (inputStream != null){
-//        			BufferedReader br = new BufferedReader( new InputStreamReader(inputStream));
-//        			String line = "";
-//        			try{
-//        				while((line=br.readLine())!= null){
-//        					Log.d("ASSETS ",line);
-//        					mDB.execSQL(line);
-//        			
-//        					if(line == "")
-//        						break;
-//        				}
-//        			}
-//        			catch (IOException e) {
-//        				e.printStackTrace();
-//        			}
-//        		}
-//        } catch (IOException e) {
-//        	e.printStackTrace();
-//        }
         
+        AssetManager assetManager = getResources().getAssets();
+        InputStream inputStream = null;
+        mDbHelper = new DatabaseHelper(this);
+     // Get the underlying database for writing
+        mDB = mDbHelper.getWritableDatabase();
+        
+
+//        clearAll();
+ 
+        Log.d("ATTENTION ", "BEFORE TRY body");
+        
+ //       ContentValues values = new ContentValues();
+        try {
+        		inputStream = assetManager.open(fileName);
+        		if (inputStream != null){
+        			BufferedReader br = new BufferedReader( new InputStreamReader(inputStream));
+        			String line = "";
+        			try{
+        				while((line=br.readLine())!= null){
+        					Log.d("ASSETS ",line);
+        					mDB.execSQL(line);
+        	//				mDB.rawQuery(line, null);
+        					if(line == "")
+        						break;
+        				}
+        			}
+        			catch (IOException e) {
+        				e.printStackTrace();
+        			}
+        		}
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+        
+ //       String sql = "Select id_question from Question where difficulty = 1";
+  /*      Cursor curs = mDB.rawQuery(sql, null);
+        while(curs.moveToNext()){
+        	Log.d("QUERY WORKS!!!", String.valueOf(curs.getInt(curs.getColumnIndex("id_question"))));
+        }
+  */      
         
     }
     
     
     public void clearAll(){
     	mDB.delete(DatabaseHelper.TABLE_ANSWER, null, null);
+    	Log.d("TABLE", "ANSWER DELETED");
     	mDB.delete(DatabaseHelper.TABLE_QUESTION, null, null);
+    	Log.d("TABLE", "QUESTION DELETED");
     }
 
     /** Button handling */
@@ -151,7 +166,21 @@ public class MenuActivity extends Activity implements OnClickListener {
                 }
         }
     
-
+    private static final int STOPSPLASH = 0;
+    private static final long SPLASHTIME = 5000; //time of view splash picture 5 sec
+    private ImageView splash;
+    
+    private Handler splashHandler = new Handler() { 
+             public void handleMessage(Message msg) {
+                 switch (msg.what) {
+                 case STOPSPLASH:
+                     //get out Splash picture
+                     splash.setVisibility(View.GONE);
+                     break;
+                 }
+                 super.handleMessage(msg);
+             }
+          };
           
     private void setPreferences(){
     	// sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
