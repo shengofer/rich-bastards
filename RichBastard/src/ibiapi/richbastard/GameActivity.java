@@ -24,9 +24,8 @@ public class GameActivity extends Activity
         setContentView(R.layout.activity_game);
         initAudioPlayer();
         initGameManager();
-        mGameManager.startGame();
         initButtons();
-
+        mGameManager.startGame();
     }
 
 
@@ -93,7 +92,10 @@ public class GameActivity extends Activity
             public void onClick(View view) 
             {
                 if (mGameManager.useFiftyFifty())
+                {
                 	fiftyFiftyButton.setEnabled(false);//setClickable(false);
+                	fiftyFiftyButton.setBackgroundResource(R.drawable.button_hint_used);
+            	}
             }
         });
         
@@ -104,7 +106,10 @@ public class GameActivity extends Activity
 			public void onClick(View v)
 			{
 				if (mGameManager.useChangeQuestion())
+				{
 					changeQuestionButton.setEnabled(false);//setClickable(false);
+					changeQuestionButton.setBackgroundResource(R.drawable.button_hint_used);
+				}
 			}
 		});
         
@@ -117,6 +122,7 @@ public class GameActivity extends Activity
 				if (mGameManager.useAskForAudience())
 				{
 					askForAudienceButton.setEnabled(false);
+					askForAudienceButton.setBackgroundResource(R.drawable.button_hint_used);
 				}
 			}
 		});
