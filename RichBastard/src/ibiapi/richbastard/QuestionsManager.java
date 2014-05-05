@@ -21,7 +21,6 @@ public class QuestionsManager
 	
 	private QuestionsManager()
 	{
-		
 	}
 	
 	public static QuestionsManager getInstance()

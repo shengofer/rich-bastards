@@ -15,6 +15,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class GameManager 
 {
@@ -56,6 +57,7 @@ public class GameManager
     private void loadQuestions(String topic)
     {
     	mQuestions = mQuestionsManager.retrieveQuestions(topic);
+    	Toast.makeText(mActivity, topic, Toast.LENGTH_SHORT).show();
     }
     
     private GameManager()
@@ -362,10 +364,10 @@ public class GameManager
 		mAnswerViews[answer].setClickable(false);
 	}
 	
-	public void startGame()
+	public void startGame(String topic)
 	{
     	// without a certain topic yet
-    	loadQuestions(null);
+    	loadQuestions(topic);
 		mQuestionNumber = 1;
 		playCurrentQuestion();
 	}

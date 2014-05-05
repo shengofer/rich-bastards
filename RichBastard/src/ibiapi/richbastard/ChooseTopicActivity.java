@@ -1,5 +1,7 @@
 package ibiapi.richbastard;
 
+import ibiapi.fontpackage.MyButtonFont;
+import ibiapi.fontpackage.MyTextViewFont;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +25,21 @@ public class ChooseTopicActivity extends Activity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.choose_topic);
 		
-		TextView chooseTopicTextView = (TextView) findViewById(R.id.chooseTopicTextView);
+		final MyTextViewFont chooseTopicTextView = (MyTextViewFont) findViewById(R.id.topicTextView);
+		
+		final MyButtonFont playButton = (MyButtonFont) findViewById(R.id.playThematicGameButton);
+		playButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View arg0)
+			{
+				Intent intent = new Intent(ChooseTopicActivity.this,GameActivity.class);
+				String topic = (String) chooseTopicTextView.getText();
+				intent.putExtra("topic", topic);
+				startActivity(intent);
+			}
+		});
+		
 		
 		/*ListView topicslistView = (ListView) findViewById(R.id.topicslistView);
 		//topicslistView.setTextFilterEnabled(true);

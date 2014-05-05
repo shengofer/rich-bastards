@@ -41,5 +41,7 @@
     <string name="takemoney">Congratulations! You take the money. Press OK to return to main menu.</string>
     <string name="ok">OK</string>
     <!-- END Game dialog -->
+    
+    <string name="playThematicGame">Play</string>
 
 </resources>

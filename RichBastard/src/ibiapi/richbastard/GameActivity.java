@@ -23,9 +23,16 @@ public class GameActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         initAudioPlayer();
+
+        String topic = null;
+        Bundle topicBundle = getIntent().getExtras();
+        if (topicBundle != null)
+        	topic = topicBundle.getString("topic");
+        
         initGameManager();
         initButtons();
-        mGameManager.startGame();
+        
+        mGameManager.startGame(topic);
     }
 
 
