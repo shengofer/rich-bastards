@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS ANSWER;
 CREATE TABLE ANSWER (id_answer INTEGER PRIMARY KEY, id_question NUMERIC, answer_text TEXT, correct NUMERIC);
 INSERT INTO ANSWER VALUES(1,1,'Murmillo',0);
 INSERT INTO ANSWER VALUES(2,1,'Retiarius',0);
@@ -135,6 +136,7 @@ INSERT INTO ANSWER VALUES(133,34,'Fridrih Scott Archer',0);
 INSERT INTO ANSWER VALUES(134,34,'Joseph Nisephor Niepps',0);
 INSERT INTO ANSWER VALUES(135,34,'Lui Daher',1);
 INSERT INTO ANSWER VALUES(136,34,'Fransua Araho',0);
+DROP TABLE IF EXISTS QUESTION;
 CREATE TABLE QUESTION (id_question INTEGER PRIMARY KEY, text TEXT, difficulty NUMERIC, topic TEXT);
 INSERT INTO QUESTION VALUES(1,'How were the gladiators in ancient Rome, who earned freedom but decided to remain gladiators, called? ',10,'history');
 INSERT INTO QUESTION VALUES(2,'Which agnomen did Lucius Cornelius Sulla acquire?',7,'history');

@@ -74,10 +74,10 @@ public class MenuActivity extends Activity implements OnClickListener {
         setPreferences();
         
         // splash screen
-        splash = (ImageView) findViewById(R.id.splashscreen); 
-        Message msg = new Message();
-        msg.what = STOPSPLASH;
-        splashHandler.sendMessageDelayed(msg, SPLASHTIME);
+//        splash = (ImageView) findViewById(R.id.splashscreen); 
+//        Message msg = new Message();
+//        msg.what = STOPSPLASH;
+//        splashHandler.sendMessageDelayed(msg, SPLASHTIME);
         
         
         AssetManager assetManager = getResources().getAssets();
