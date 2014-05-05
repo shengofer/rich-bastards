@@ -22,12 +22,15 @@
                 android:clickable="false"
                 android:src="@drawable/logo_view" />
 
-            <TextView
+            <ibiapi.fontpackage.MyTextViewFont
+	    	style="@style/button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/logo_view"
                 android:layout_marginTop="30dp"
-                android:text="@string/help_text" />
+                android:text="@string/help_text" 
+                android:textColor="#000"
+                android:background="#4385f5"/>
         </RelativeLayout>
     </LinearLayout>
 

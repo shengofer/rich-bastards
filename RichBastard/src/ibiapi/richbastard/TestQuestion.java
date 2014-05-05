@@ -7,7 +7,7 @@ import java.util.Map;
 
 import db.Answer;
 import db.App;
-import db.DataBaseHelper;
+import db.DatabaseHelper;
 import db.Question;
 
 public class TestQuestion 

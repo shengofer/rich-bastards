@@ -6,14 +6,14 @@ import java.util.Map;
 
 import db.Answer;
 import db.App;
-import db.DataBaseHelper;
+import db.DatabaseHelper;
 import db.Question;
 
 public class QuestionsManager
 {
 	private static QuestionsManager instance = null;
 	
-	private static DataBaseHelper dbHelper = null;
+	private static DatabaseHelper dbHelper = null;
 	
 	private TestQuestion[] questions = null;
 	
@@ -47,7 +47,7 @@ public class QuestionsManager
 	
 	public TestQuestion[] retrieveQuestions(String tpc)
 	{
-		dbHelper = App.db;
+		//dbHelper = App.db;
 		topic = tpc;
 		// TODO: retrieve questions by topic
 		questions = new TestQuestion[GameManager.getNumberOfQuestions()];

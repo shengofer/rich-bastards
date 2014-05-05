@@ -79,39 +79,39 @@ public class MenuActivity extends Activity implements OnClickListener {
         splashHandler.sendMessageDelayed(msg, SPLASHTIME);
         
         
-        AssetManager assetManager = getResources().getAssets();
-        InputStream inputStream = null;
-        mDbHelper = new DatabaseHelper(this);
-     // Get the underlying database for writing
-        mDB = mDbHelper.getWritableDatabase();
-        
-
-//      clearAll();
-        
-        Log.d("ATTENTION ", "BEFORE TRY body");
-        
- //       ContentValues values = new ContentValues();
-        try {
-        		inputStream = assetManager.open(fileName);
-        		if (inputStream != null){
-        			BufferedReader br = new BufferedReader( new InputStreamReader(inputStream));
-        			String line = "";
-        			try{
-        				while((line=br.readLine())!= null){
-        					Log.d("ASSETS ",line);
-        					mDB.execSQL(line);
-        			
-        					if(line == "")
-        						break;
-        				}
-        			}
-        			catch (IOException e) {
-        				e.printStackTrace();
-        			}
-        		}
-        } catch (IOException e) {
-        	e.printStackTrace();
-        }
+//        AssetManager assetManager = getResources().getAssets();
+//        InputStream inputStream = null;
+//        mDbHelper = new DatabaseHelper(this);
+//     // Get the underlying database for writing
+//        mDB = mDbHelper.getWritableDatabase();
+//        
+//
+////      clearAll();
+//        
+//        Log.d("ATTENTION ", "BEFORE TRY body");
+//        
+// //       ContentValues values = new ContentValues();
+//        try {
+//        		inputStream = assetManager.open(fileName);
+//        		if (inputStream != null){
+//        			BufferedReader br = new BufferedReader( new InputStreamReader(inputStream));
+//        			String line = "";
+//        			try{
+//        				while((line=br.readLine())!= null){
+//        					Log.d("ASSETS ",line);
+//        					mDB.execSQL(line);
+//        			
+//        					if(line == "")
+//        						break;
+//        				}
+//        			}
+//        			catch (IOException e) {
+//        				e.printStackTrace();
+//        			}
+//        		}
+//        } catch (IOException e) {
+//        	e.printStackTrace();
+//        }
         
         
     }
