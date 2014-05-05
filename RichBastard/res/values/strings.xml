@@ -8,9 +8,20 @@
     <string name="title_activity_help">HelpActivity</string>
     
     <string name="help_text">
-        I need to google how to edit text here appropriately. \n
-        Bob\'s paragraph \n
-        Another awesome Bob\'s paragraph
+        Welcome to the Rich Bastard application!\n
+        In this game your goal is to answer correctly as many questions as possible.\n
+        There are three game modes: <b>Classic game</b>, which resembles a popular TV show, 
+        <b>Thematical</b> game, where the questions are from a particular topic, 
+        and a <b>Blitz round</b>, where you have limited time to think, so you\'d better be quick!\n
+        \n
+        Each question has 4 answer choices, only <i>one</i> of which is correct. 
+        You may also use one of each three <b>hints:</b>\n
+        * <i>50x50</i> - removes two wrong answer choices.\n
+        * <i>Ask the audience</i> - the real-life simulation of a audience responses, with normal distribution.\n
+        * <i>Change the question</i> - if you find the question too challenging, you may use this hint to change it to a another one.
+        But be vary! If you have used previous hints on this question, the new question won\'t have the results of these hints.\n
+        \n 
+        Good luck, and become rich, bastard! =)\n          
     </string>
     
     <!-- START Menu resourses -->
