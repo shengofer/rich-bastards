@@ -87,13 +87,7 @@
         android:textColor="#000"
         android:textSize="25sp" />
     
-    <ImageView
-                android:id="@+id/splashscreen"
-                android:contentDescription="@string/splash_description"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/splash"
-                android:layout_gravity="center"/>
+
     
 
 </RelativeLayout>

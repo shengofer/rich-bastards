@@ -72,12 +72,6 @@ public class MenuActivity extends Activity implements OnClickListener {
          */
         setPreferences();
         
-        // splash screen
-        splash = (ImageView) findViewById(R.id.splashscreen); 
-        Message msg = new Message();
-        msg.what = STOPSPLASH;
-        splashHandler.sendMessageDelayed(msg, SPLASHTIME);
-        
         
 //        AssetManager assetManager = getResources().getAssets();
 //        InputStream inputStream = null;
@@ -157,21 +151,7 @@ public class MenuActivity extends Activity implements OnClickListener {
                 }
         }
     
-    private static final int STOPSPLASH = 0;
-    private static final long SPLASHTIME = 5000; //time of view splash picture 5 sec
-    private ImageView splash;
-    
-    private Handler splashHandler = new Handler() { 
-             public void handleMessage(Message msg) {
-                 switch (msg.what) {
-                 case STOPSPLASH:
-                     //get out Splash picture
-                     splash.setVisibility(View.GONE);
-                     break;
-                 }
-                 super.handleMessage(msg);
-             }
-          };
+
           
     private void setPreferences(){
     	// sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);

@@ -14,8 +14,8 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="ibiapi.richbastard.MenuActivity"
-            class="ibiapi.richbastard.MenuActivity"
+            android:name="ibiapi.richbastard.SplashScreenActivity"
+            class="ibiapi.richbastardSplashScreenActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -24,6 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="ibiapi.richbastard.MenuActivity"
+            android:screenOrientation="portrait" >
+        </activity> 
         <activity
             android:name="ibiapi.richbastard.ChooseGameModeActivity"
             android:screenOrientation="portrait" >
