@@ -16,14 +16,6 @@
             android:title="Enable music" >
         </CheckBoxPreference>
         
-        <ListPreference 
-            android:key="pref_music_theme"
-            android:title="Music set"
-            android:summary="Define sound theme"
-            android:defaultValue="1" 
-            android:entries="@array/musicSet"
-            android:entryValues="@array/musicSetValues"
-        />  
  </PreferenceCategory>
 
 </PreferenceScreen>
