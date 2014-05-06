@@ -125,6 +125,7 @@ public class GameManager
 	public void setActivity(GameActivity mActivity)
 	{
 		this.mActivity = mActivity;
+    	mQuestionsManager.setActivity(mActivity);
 	}
 	
 	public void initViewReferences()

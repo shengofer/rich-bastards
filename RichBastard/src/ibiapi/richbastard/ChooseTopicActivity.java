@@ -1,5 +1,7 @@
 package ibiapi.richbastard;
 
+import java.util.ArrayList;
+
 import ibiapi.fontpackage.MyButtonFont;
 import ibiapi.fontpackage.MyTextViewFont;
 import android.app.Activity;
@@ -19,6 +21,10 @@ import android.widget.Toast;
 
 public class ChooseTopicActivity extends Activity
 {
+
+	private static String[] topics = {};
+	private static int currentTopicIndex = 0;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -26,6 +32,7 @@ public class ChooseTopicActivity extends Activity
 		setContentView(R.layout.choose_topic);
 		
 		final MyTextViewFont chooseTopicTextView = (MyTextViewFont) findViewById(R.id.topicTextView);
+		chooseTopicTextView.setText(topics[currentTopicIndex]);		
 		
 		final MyButtonFont playButton = (MyButtonFont) findViewById(R.id.playThematicGameButton);
 		playButton.setOnClickListener(new View.OnClickListener()

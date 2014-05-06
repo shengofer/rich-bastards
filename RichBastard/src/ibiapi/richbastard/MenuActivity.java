@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import db.DatabaseHelper;
+import db.Question;
 import ibiapi.fontpackage.MyButtonFont;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -82,9 +83,10 @@ public class MenuActivity extends Activity implements OnClickListener {
         
         AssetManager assetManager = getResources().getAssets();
         InputStream inputStream = null;
-        mDbHelper = new DatabaseHelper(this);
+        mDbHelper = DatabaseHelper.getInstance(this);
      // Get the underlying database for writing
-        mDB = mDbHelper.getWritableDatabase();
+//        mDB = mDbHelper.getWritableDatabase();
+        mDbHelper.setDataBase(mDB = mDbHelper.getWritableDatabase());
         
 
 //        clearAll();
@@ -114,12 +116,13 @@ public class MenuActivity extends Activity implements OnClickListener {
         	e.printStackTrace();
         }
         
- //       String sql = "Select id_question from Question where difficulty = 1";
-  /*      Cursor curs = mDB.rawQuery(sql, null);
-        while(curs.moveToNext()){
-        	Log.d("QUERY WORKS!!!", String.valueOf(curs.getInt(curs.getColumnIndex("id_question"))));
-        }
-  */      
+        
+//       String sql = "Select id_question from Question where difficulty = 1";
+//        Cursor curs = mDB.rawQuery(sql, null);
+//        while(curs.moveToNext()){
+//        	Log.d("QUERY WORKS!!!", String.valueOf(curs.getInt(curs.getColumnIndex("id_question"))));
+//        }
+        
         
     }
     

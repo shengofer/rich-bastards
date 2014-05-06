@@ -1,6 +1,11 @@
 package db;
 
+import ibiapi.richbastard.TestQuestion;
+
+import java.util.ArrayList;
+
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -28,15 +33,31 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	
 	public boolean _should_fill = false;
 	
+	  
+    private SQLiteDatabase myDataBase;    
+	
 	public boolean shouldFill(){
 		  return _should_fill;
 	  }
 	
 	
-	public DatabaseHelper(Context context){
+	private DatabaseHelper(Context context){
 		super(context, DB_NAME, null, (DB_VERSION+1));
 	}
 	
+	private static DatabaseHelper instance = null;
+    
+    public static DatabaseHelper getInstance(Context context)
+    {
+    	if (instance == null)
+    		instance = new DatabaseHelper(context);
+    	return instance;
+    }
+	
+    public void setDataBase(SQLiteDatabase db)
+	{
+		myDataBase = db;
+	}
 
 	@Override
 	public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -63,6 +84,68 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS "+ TABLE_QUESTION);
 		sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_ANSWER);
 		onCreate(sqLiteDatabase);		
+	}
+	
+	
+	// TODO: select a question randomly
+		// hint: SELECT * FROM table ORDER BY RANDOM() LIMIT 1;
+		// more TODO: retrieve a question which id is not equal to a specified id
+	public TestQuestion getQuestionWithAnswers(String topic, long quest_number){
+		//quest_number is the number of the question or difficulty(in db)
+		
+		//first we will select the important question
+		Cursor cursor = myDataBase.rawQuery(
+		"SELECT * FROM Question WHERE difficulty=? AND topic=? ORDER BY RANDOM() LIMIT 1",   
+						new String[] { String.valueOf(quest_number), topic });
+		
+		int cnt = cursor.getCount();
+		cursor.moveToFirst();
+		
+		//let's get the selected question
+		Question question = new Question(
+				cursor.getLong(cursor.getColumnIndex("id_question")),
+				cursor.getString(cursor.getColumnIndex("text")),
+				quest_number,
+				cursor.getString(cursor.getColumnIndex("topic"))				
+				);
+		
+		
+		System.out.println(question.getText()+" ; "+question.get_difficulty());
+		
+		//this is the id of the question
+		long id = cursor.getLong(cursor.getColumnIndex("id_question"));
+		cursor.close();
+		
+		//let's select the answers for this question
+		Cursor curs = myDataBase.rawQuery(
+				"SELECT * FROM Answer WHERE id_question = ?;",
+			     new String[] { String.valueOf(id) }
+				);
+		
+		Answer[] answers = new Answer[4];
+//		ArrayList<Answer> ans = new ArrayList<Answer>();
+		if(curs != null){
+			if (curs.moveToFirst()){
+				int i = 0;
+				do{
+					answers[i++] = new Answer(
+							curs.getLong(curs.getColumnIndex("id_answer")),
+							curs.getString(curs.getColumnIndex("answer_text")),
+							id,
+							curs.getLong(curs.getColumnIndex("correct"))
+							);
+//					ans.add(answer);
+				} while(curs.moveToNext());
+			}
+		};
+		
+		
+//		Map<Question, ArrayList<Answer>> result = new LinkedHashMap<Question, ArrayList<Answer>>();
+//		result.put(question, ans);
+//		
+//		return result;	
+		TestQuestion tQuestion = new TestQuestion(question,answers);
+		return tQuestion;
 	}
 
 

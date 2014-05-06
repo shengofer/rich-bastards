@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Map;
 
 import db.Answer;
-import db.App;
 import db.DatabaseHelper;
 import db.Question;
 

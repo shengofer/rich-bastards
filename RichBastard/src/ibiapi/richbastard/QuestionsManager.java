@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import android.util.Log;
+
 import db.Answer;
-import db.App;
 import db.DatabaseHelper;
 import db.Question;
 
@@ -13,7 +14,8 @@ public class QuestionsManager
 {
 	private static QuestionsManager instance = null;
 	
-	private static DatabaseHelper dbHelper = null;
+	//private static DatabaseHelper dbHelper = null;
+	private static DatabaseHelper dao = null;
 	
 	private TestQuestion[] questions = null;
 	
@@ -33,6 +35,13 @@ public class QuestionsManager
 		return instance;
 	}
 	
+    private GameActivity mActivity;
+	
+	public void setActivity(GameActivity activity)
+	{
+		mActivity = activity;
+	}
+	
 	// TODO: get rid of this
 	private TestQuestion testQuestion = new TestQuestion(
 			new Question("Who discovered America?",0,null), 
@@ -46,15 +55,16 @@ public class QuestionsManager
 	
 	public TestQuestion[] retrieveQuestions(String tpc)
 	{
-		//dbHelper = App.db;
+		dao = DatabaseHelper.getInstance(mActivity);
 		topic = tpc;
 		// TODO: retrieve questions by topic
 		questions = new TestQuestion[GameManager.getNumberOfQuestions()];
 		for (int q = 1; q <= questions.length; ++q)
 		{
+			Log.d("q ", String.valueOf(q));
 			// TODO: what if appropriate question was not found?
-			//questions[q-1] = dbHelper.getQuestionWithAnswers(q);
-			questions[q-1] = testQuestion;
+			questions[q-1] = dao.getQuestionWithAnswers(topic,q);
+			//questions[q-1] = testQuestion;
 		}
 		return questions;
 	}
