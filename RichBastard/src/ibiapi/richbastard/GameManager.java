@@ -382,7 +382,7 @@ public class GameManager
 		Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 		    public void run() {
-		    	mActivity.showCondDialog(sums[mQuestionNumber-1]);
+		    	mActivity.showCondDialog(sums[mQuestionNumber-1], mQuestionNumber);
 		    }}, 3000);
 	}
 	

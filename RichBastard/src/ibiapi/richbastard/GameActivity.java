@@ -206,18 +206,33 @@ public class GameActivity extends Activity
 	
     public void showWinDialog() {
 		// create alert dialog
-        String message = getResources().getString(R.string.congratz);
+        String message = getResources().getString(R.string.epicwin);
 		Dialog dialog = onCreateDialog(message);
 		// show it
 		dialog.show();
       }
     
-    public void showCondDialog(int sum){
+    public void showCondDialog(int sum, int questionNumber){
     	// create alert dialog
-		String message = String.format(getResources().getString(R.string.condolence), sum);
+    	String message = null;
+    	if (questionNumber == 1) {
+    		message = getResources().getString(R.string.epicfail);
+    	} else if (isBetween(questionNumber, 2, 5)) {
+    		message = getResources().getString(R.string.lost2to5);
+    	} else if (isBetween(questionNumber, 6, 10)) {
+    		message = getResources().getString(R.string.lost6to10);
+    	} else if (isBetween(questionNumber, 11, 15)) {
+    		message = getResources().getString(R.string.lost11to15);
+    	}
+		//String message = String.format(getResources().getString(R.string.condolence), sum);
+    	
 		Dialog dialog = onCreateDialog(message);
 		// show it
 		dialog.show();
+    }
+    
+    private static boolean isBetween(int x, int lower, int upper) {
+    	return lower <= x && x <= upper;
     }
     
 //    public void showTakeMoneyDialog(){

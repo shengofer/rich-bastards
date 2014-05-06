@@ -36,9 +36,14 @@
     
     <!-- START Game dialog -->
     <string name="end">End</string>
-    <string name="congratz">You were AWESOME! Congratulations! Now you are officially titled Rich Bastard!</string>
-    <string name="condolence">Congratulations! You have won %d₴, you bastard! Press OK to return to main menu.</string>
-    <string name="takemoney">Congratulations! You take the money. Press OK to return to main menu.</string>
+    <string name="epicwin">You were AWESOME! Congratulations! Now you are officially titled Rich Bastard!</string>
+    <string name="takemoney">Congratulations! You have won %d₴, you bastard! Press OK to return to main menu.</string>
+    <string name="epicfail">Well, you were so close to winning a million.. Kidding! You failed on the first question.</string>
+    <string name="lost2to5">Come on, you can do it better. Wish you good luck!</string>
+    <string name="lost6to10">You were good.. Better luck next time!</string>
+    <string name="lost11to15">You were close.. You played great, bastard! Next time you\'ll make it!</string>
+    <string name="congratz"></string>
+    <string name="condolence"></string>
     <string name="ok">OK</string>
     <!-- END Game dialog -->
     
