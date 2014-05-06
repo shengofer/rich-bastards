@@ -48,7 +48,7 @@ public class GameManager
     private TestQuestion[] mQuestions;
     
     private static Timer mTimer;
-    private final int mTimeLimit = 10;
+    private final int mTimeLimit = 15;
     private int mSecondsPassed;
     private static Handler mTimerViewHandler;
     private static String mTimerMessage;
@@ -244,8 +244,8 @@ public class GameManager
 		{
 			if (!isAnswerCleared(ans))
 			{
-				double mu, sigma = 0.5 + 0.03 * (posAns + 1);
-				mu = (isAnswerCorrect(ans)) ? 30 / (1.5 * (posAns + 1) - 0.5) : 1;
+				double mu, sigma = 0.5 + 0.03 * (mQuestionNumber);
+				mu = (isAnswerCorrect(ans)) ? 30 / (1.5 * (mQuestionNumber) - 0.5) : 1;
 				weightsSum += (weights[posAns] = getGaussian(mu, sigma));
 				++posAns;
 			}
