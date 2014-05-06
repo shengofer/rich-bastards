@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,8 +23,9 @@ import android.widget.Toast;
 public class ChooseTopicActivity extends Activity
 {
 
-	private static String[] topics = {};
+	private static String[] topics = {"Art", "Geography"};
 	private static int currentTopicIndex = 0;
+	private static final int numberOfTopics = 2;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +49,27 @@ public class ChooseTopicActivity extends Activity
 			}
 		});
 		
+		final Button rightButton = (Button) findViewById(R.id.rightArrow);
+		rightButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				currentTopicIndex = (currentTopicIndex + 1) % numberOfTopics;
+				chooseTopicTextView.setText(topics[currentTopicIndex]);
+			}
+		});
+		
+		final Button leftButton = (Button) findViewById(R.id.leftArrow);
+		leftButton.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				currentTopicIndex = (currentTopicIndex - 1 + numberOfTopics) % numberOfTopics;
+				chooseTopicTextView.setText(topics[currentTopicIndex]);
+			}
+		});
 		
 		/*ListView topicslistView = (ListView) findViewById(R.id.topicslistView);
 		//topicslistView.setTextFilterEnabled(true);

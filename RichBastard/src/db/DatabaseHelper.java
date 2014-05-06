@@ -90,16 +90,50 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	// TODO: select a question randomly
 		// hint: SELECT * FROM table ORDER BY RANDOM() LIMIT 1;
 		// more TODO: retrieve a question which id is not equal to a specified id
-	public TestQuestion getQuestionWithAnswers(String topic, long quest_number){
+	public TestQuestion getQuestionWithAnswers(String topic, long quest_number, long curQuestId)
+	{
 		//quest_number is the number of the question or difficulty(in db)
 		
 		//first we will select the important question
-		Cursor cursor = myDataBase.rawQuery(
-		"SELECT * FROM Question WHERE difficulty=? AND topic=? ORDER BY RANDOM() LIMIT 1",   
-						new String[] { String.valueOf(quest_number), topic });
+		Cursor cursor = null;
+		if (curQuestId == -1)
+		{
+			if (topic != null)
+				cursor = myDataBase.rawQuery(
+						"SELECT * FROM Question WHERE difficulty=? AND topic=? ORDER BY RANDOM() LIMIT 1",   
+							new String[] { String.valueOf(quest_number), topic });
+			else
+				cursor = myDataBase.rawQuery(
+						"SELECT * FROM Question WHERE difficulty=? ORDER BY RANDOM() LIMIT 1",   
+							new String[] { String.valueOf(quest_number)});
+			cursor.moveToFirst();
+		}
+		else
+		{
+			if (topic != null)
+				cursor = myDataBase.rawQuery(
+						"SELECT * FROM Question WHERE difficulty=? AND topic=? ORDER BY RANDOM()",   
+							new String[] { String.valueOf(quest_number), topic });
+			else
+				cursor = myDataBase.rawQuery(
+						"SELECT * FROM Question WHERE difficulty=? ORDER BY RANDOM()",   
+							new String[] { String.valueOf(quest_number)});
+			cursor.moveToFirst();
+//			int cnt = cursor.getCount();
+			long qId = cursor.getLong(cursor.getColumnIndex("id_question"));
+			while (curQuestId == qId)
+			{
+				if (cursor.moveToNext())
+					qId = cursor.getLong(cursor.getColumnIndex("id_question"));
+				else
+				{
+					cursor.moveToFirst();
+					break;
+				}
+			}
+		}
 		
-		int cnt = cursor.getCount();
-		cursor.moveToFirst();
+//		int cnt = cursor.getCount();
 		
 		//let's get the selected question
 		Question question = new Question(

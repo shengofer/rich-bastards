@@ -1,9 +1,5 @@
 package ibiapi.richbastard;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import android.util.Log;
 
 import db.Answer;
@@ -42,17 +38,6 @@ public class QuestionsManager
 		mActivity = activity;
 	}
 	
-	// TODO: get rid of this
-	private TestQuestion testQuestion = new TestQuestion(
-			new Question("Who discovered America?",0,null), 
-			new Answer[]
-			{
-				new Answer("Vasco da Gama",0,0),
-				new Answer("Marko Polo",0,0),
-				new Answer("Christopher Columbus",0,1),
-				new Answer("Hernan Cortes",0,0)
-			});
-	
 	public TestQuestion[] retrieveQuestions(String tpc)
 	{
 		dao = DatabaseHelper.getInstance(mActivity);
@@ -63,7 +48,7 @@ public class QuestionsManager
 		{
 			Log.d("q ", String.valueOf(q));
 			// TODO: what if appropriate question was not found?
-			questions[q-1] = dao.getQuestionWithAnswers(topic,q);
+			questions[q-1] = dao.getQuestionWithAnswers(topic,q,-1);
 			//questions[q-1] = testQuestion;
 		}
 		return questions;
@@ -74,7 +59,7 @@ public class QuestionsManager
 		// TODO: check if this method was invoked before the retrieveQuestions() was
 		// TODO: retrieve question by topic
 		//TestQuestion question = dbHelper.getQuestionWithAnswers(qNum);
-		TestQuestion question = testQuestion;
+		TestQuestion question = dao.getQuestionWithAnswers(topic,qNum,questions[qNum-1].getQuestionId());
 		questions[qNum-1] = question;
 		// TODO: what if appropriate question was not found?
 		return question;

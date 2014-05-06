@@ -85,4 +85,9 @@ public class TestQuestion
 	{
 		Collections.shuffle(Arrays.asList(answer_options));
 	}
+	
+	public long getQuestionId()
+	{
+		return question.getId_qstn();
+	}
 }
